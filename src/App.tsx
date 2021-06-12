@@ -1,7 +1,9 @@
 import * as React from "react";
-import { ChakraProvider, Box, Text, Link, VStack, Code, Grid, extendTheme, ColorMode } from "@chakra-ui/react";
+import { ChakraProvider, Box, Text, Link, VStack, Code, Grid, extendTheme, ColorMode, GridItem } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
 import { Logo } from "./Logo";
+import Header from "./components/Header";
+import Foreground from "./components/Foreground";
 
 export interface ChakraConfig {
   initialColorMode: ColorMode;
@@ -17,19 +19,13 @@ const theme = extendTheme({ config });
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      {x}
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link color="teal.500" href="https://chakra-ui.com" fontSize="2xl" target="_blank" rel="noopener noreferrer">
-            Learn Chakra
-          </Link>
-        </VStack>
+    <Box fontSize="xl">
+      <Header />
+      <Grid p="3" templateColumns={{ base: "1fr", md: "2fr 3fr" }}>
+        <GridItem></GridItem>
+        <GridItem>
+          <Foreground />
+        </GridItem>
       </Grid>
     </Box>
   </ChakraProvider>
