@@ -1,7 +1,8 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
 import { Logo } from "../Logo";
+import BrowserWindow from "./Toolbox/BrowserWindow/BrowserWindow";
 
 const Foreground = () => {
   const foregroundRef = useRef(null);
@@ -33,8 +34,16 @@ const Foreground = () => {
   };
 
   return (
-    <Flex ref={foregroundRef} onClick={clickHandler} justifyContent="center" bgGradient="linear(to-t, green.200, pink.500)" p="10%">
-      <Logo h="40vmin" pointerEvents="none" />
+    <Flex
+      ref={foregroundRef}
+      // onClick={clickHandler}
+      justifyContent="center"
+      flexDirection="column"
+      bgGradient="linear(to-t, green.200, pink.500)"
+      p="10%"
+    >
+      <BrowserWindow />
+      <Image w="100" src="../../test.jpg" />
     </Flex>
   );
 };
