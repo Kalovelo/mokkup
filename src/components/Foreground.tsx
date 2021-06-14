@@ -1,8 +1,7 @@
 import { Flex, Image } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
-import { Logo } from "../Logo";
-import BrowserWindow from "./Toolbox/BrowserWindow/BrowserWindow";
+import BrowserWindow from "./BrowserWindow/BrowserWindow";
 
 const Foreground = () => {
   const foregroundRef = useRef(null);
