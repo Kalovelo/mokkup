@@ -1,27 +1,29 @@
-import { Grid, Icon } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box } from "@chakra-ui/react";
 import React from "react";
-import StackRadioGroup from "../StackRadioGroup/StackRadioGroup";
-import { CgEditFade } from "react-icons/cg";
+import BackgroundPicker from "../BackgroundPicker/BackgroundPicker";
 
 const Toolbox = () => {
-  const RadioGroups = [
+  const pickers = [
     {
-      name: "Background",
-      options: [
-        {
-          value: "reacto",
-          label: <Icon as={CgEditFade} />,
-        },
-      ],
+      title: "Background",
+      component: <BackgroundPicker />,
     },
   ];
 
   return (
-    <Grid>
-      {RadioGroups.map((group) => (
-        <StackRadioGroup {...group} />
+    <Accordion defaultIndex={[0]} allowMultiple>
+      {pickers.map((picker) => (
+        <AccordionItem>
+          <AccordionButton>
+            <Box fontWeight="bold" flex="1" textAlign="left">
+              <h2>{picker.title}</h2>
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>{picker.component}</AccordionPanel>
+        </AccordionItem>
       ))}
-    </Grid>
+    </Accordion>
   );
 };
 

@@ -16,11 +16,11 @@ const StackRadioGroup = ({ options, name, callback }: IStackRadioGroupProps) => 
   const group = getRootProps();
 
   return (
-    <HStack {...group}>
+    <HStack {...group} gridGap="1rem">
       {options.map((option) => {
         const radio = getRadioProps({ ...getRadioProps(), value: option.value });
         return (
-          <WrapRadio key={option.value} radioProps={radio}>
+          <WrapRadio tooltip={option.value as string} key={option.value} radioProps={radio}>
             {option.label}
           </WrapRadio>
         );
