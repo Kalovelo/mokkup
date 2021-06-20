@@ -35,9 +35,7 @@ const WrapRadio = ({ radioProps, children, tooltip }: IWrapRadioProps) => {
             boxShadow: "outline",
           }}
           p={4}
-          py={3}
-          maxHeight="60px"
-          maxWidth="60px"
+          py={4}
         >
           {children}
         </Box>

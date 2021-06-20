@@ -6,10 +6,12 @@ interface IStackRadioGroupProps {
   options: { value: string | number; label: JSX.Element }[];
   name: string;
   callback?: (nextValue: string) => void;
+  defaultValue?: string;
 }
-const StackRadioGroup = ({ options, name, callback }: IStackRadioGroupProps) => {
+const StackRadioGroup = ({ options, name, callback, defaultValue }: IStackRadioGroupProps) => {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: name,
+    defaultValue,
     onChange: callback,
   });
 
