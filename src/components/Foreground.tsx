@@ -1,10 +1,14 @@
 import { Flex, Image } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
+import { useContext } from "react";
 import BrowserWindow from "./BrowserWindow/BrowserWindow";
+import { SetupContext } from "./Context/Context";
 
 const Foreground = () => {
   const foregroundRef = useRef(null);
+
+  const context = useContext(SetupContext);
 
   const saveAs = (uri: string, filename: string) => {
     var link = document.createElement("a");
@@ -38,7 +42,7 @@ const Foreground = () => {
       // onClick={clickHandler}
       justifyContent="center"
       flexDirection="column"
-      bgGradient="linear(to-t, green.200, pink.500)"
+      {...context?.background}
       p="10%"
     >
       <BrowserWindow />
