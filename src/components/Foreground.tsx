@@ -8,7 +8,12 @@ import { SetupContext } from "./Context/Context";
 const Foreground = () => {
   const foregroundRef = useRef(null);
 
-  const context = useContext(SetupContext);
+  const { colors, direction } = useContext(SetupContext)!.background;
+
+  const background = () => {
+    if (colors.length === 0) return { bg: "transparent" };
+    if (colors.length === 1) return { bg: colors[0] };
+  };
 
   const saveAs = (uri: string, filename: string) => {
     var link = document.createElement("a");
@@ -42,7 +47,7 @@ const Foreground = () => {
       // onClick={clickHandler}
       justifyContent="center"
       flexDirection="column"
-      {...context?.background}
+      {...background()}
       p="10%"
     >
       <BrowserWindow />
