@@ -18,7 +18,7 @@ const StackRadioGroup = ({ options, name, callback, defaultValue }: IStackRadioG
   const group = getRootProps();
 
   return (
-    <HStack {...group} gridGap="1rem">
+    <HStack flexWrap="wrap" justifyContent="center" {...group} gridGap="1rem">
       {options.map((option) => {
         const radio = getRadioProps({ ...getRadioProps(), value: option.value });
         return (

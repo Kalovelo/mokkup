@@ -1,14 +1,21 @@
-import { Box, Grid, Icon } from "@chakra-ui/react";
+import { Box, Grid, Icon, Popover } from "@chakra-ui/react";
 import { SetupContext } from "components/Context/Context";
 import React, { useContext, useState } from "react";
-import { SketchPicker, ColorResult, Color, RGBColor } from "react-color";
+import { ChromePicker, ColorResult, Color, RGBColor } from "react-color";
 import { CgEditFade } from "react-icons/cg";
 import { GiPlainCircle } from "react-icons/gi";
 import StackRadioGroup from "../StackRadioGroup/StackRadioGroup";
 
-const formatRGBA = (color: ColorResult | Color) => {
-  let { r, g, b, a } = (color as ColorResult).rgb ? (color as ColorResult).rgb : (color as RGBColor);
-  return `rgba(${r},${g},${b},${a})`;
+const formatRGBA = (color: ColorResult | Color | string): string => {
+  if ((color as ColorResult).rgb) {
+    const { r, g, b, a } = (color as ColorResult).rgb;
+    return `rgba(${r},${g},${b},${a})`;
+  }
+  if ((color as RGBColor).r) {
+    const { r, g, b, a } = color as RGBColor;
+    return `rgba(${r},${g},${b},${a})`;
+  }
+  return color as string;
 };
 
 const BackgroundPicker = () => {
@@ -25,31 +32,33 @@ const BackgroundPicker = () => {
       },
     ],
   };
-  const defaultValue = RadioGroup.options[0].value;
 
   const context = useContext(SetupContext);
-  const [solidColor, setSolidColor] = useState<Color>("ccc");
+  const [backgroundType, setBackgroundType] = useState<string>(RadioGroup.options[0].value);
 
   const handleSolidChange = (color: ColorResult) => {
-    setSolidColor(color.rgb);
     context?.setBackground({ colors: [formatRGBA(color)] });
   };
 
   const handleTypeChange = (type: string) => {
     switch (type) {
       case "Solid":
-        return context?.setBackground({ colors: [formatRGBA(solidColor)] });
+        setBackgroundType("Solid");
+        return context?.setBackground({ colors: [formatRGBA(context?.background.colors[0])] });
       case "Gradient":
-        return context?.setBackground({ colors: [] });
+        setBackgroundType("Gradient");
+        return context?.setBackground({ colors: ["#ccc"] });
     }
   };
 
   return (
     <Grid>
-      <StackRadioGroup defaultValue={defaultValue} {...RadioGroup} callback={handleTypeChange} />
-      <Box marginTop="20">
-        <SketchPicker presetColors={[]} color={solidColor} onChange={handleSolidChange} />
-      </Box>
+      <StackRadioGroup defaultValue={backgroundType} {...RadioGroup} callback={handleTypeChange} />
+      {backgroundType === "Solid" && (
+        <Box margin="20px auto">
+          <ChromePicker color={context?.background.colors[0]} onChange={handleSolidChange} />
+        </Box>
+      )}
     </Grid>
   );
 };

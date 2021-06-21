@@ -42,14 +42,7 @@ const Foreground = () => {
   };
 
   return (
-    <Flex
-      ref={foregroundRef}
-      // onClick={clickHandler}
-      justifyContent="center"
-      flexDirection="column"
-      {...background()}
-      p="10%"
-    >
+    <Flex ref={foregroundRef} onClick={clickHandler} justifyContent="center" flexDirection="column" {...background()} p="10%">
       <BrowserWindow />
       <Image w="100" src="../../test.jpg" />
     </Flex>
