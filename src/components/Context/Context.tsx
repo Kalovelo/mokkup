@@ -13,7 +13,7 @@ type SetupContextType = {
 export const SetupContext = createContext<SetupContextType | null>(null);
 
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [background, setBackground] = useState<Background>({ colors: ["#ccc"] });
+  const [background, setBackground] = useState<Background>({ colors: ["#ccc", "#ccc"] });
 
   return <SetupContext.Provider value={{ background, setBackground }}>{children}</SetupContext.Provider>;
 };
