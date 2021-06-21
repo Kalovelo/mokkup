@@ -13,6 +13,12 @@ const Foreground = () => {
   const background = () => {
     if (colors.length === 0) return { bg: "transparent" };
     if (colors.length === 1) return { bg: colors[0] };
+
+    // colors > 0, therefore it is gradient
+    const reducer = (accumulator: string, currentValue: string) => accumulator + currentValue + ",";
+    let gradient = colors.reduce(reducer, `linear(to-r,`);
+    gradient += ")";
+    return { bgGradient: gradient };
   };
 
   const saveAs = (uri: string, filename: string) => {
