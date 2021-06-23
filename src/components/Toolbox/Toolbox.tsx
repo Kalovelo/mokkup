@@ -12,8 +12,8 @@ const Toolbox = () => {
 
   return (
     <Accordion defaultIndex={[0]} allowMultiple>
-      {pickers.map((picker) => (
-        <AccordionItem>
+      {pickers.map((picker, index) => (
+        <AccordionItem key={index}>
           <AccordionButton>
             <Box fontWeight="bold" flex="1" textAlign="left">
               <h2>{picker.title}</h2>

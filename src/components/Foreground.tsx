@@ -2,6 +2,7 @@ import { Flex, Image } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
 import { useContext } from "react";
+import { generateGradient } from "utils/colors";
 import BrowserWindow from "./BrowserWindow/BrowserWindow";
 import { SetupContext } from "./Context/Context";
 
@@ -13,12 +14,7 @@ const Foreground = () => {
   const background = () => {
     if (colors.length === 0) return { bg: "transparent" };
     if (colors.length === 1) return { bg: colors[0] };
-
-    // colors > 0, therefore it is gradient
-    const reducer = (accumulator: string, currentValue: string) => accumulator + currentValue + ",";
-    let gradient = colors.reduce(reducer, `linear(to-r,`);
-    gradient += ")";
-    return { bgGradient: gradient };
+    return { bgGradient: generateGradient(colors) };
   };
 
   const saveAs = (uri: string, filename: string) => {
