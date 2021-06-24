@@ -9,25 +9,21 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Popover,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverTrigger,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
-import { SetupContext } from "components/Context/Context";
+import { ColorPick } from "components/ColorPicker";
+import { SetupContext } from "components/Context";
 import React, { useContext } from "react";
-import { ChromePicker, ColorResult } from "react-color";
+import { ColorResult } from "react-color";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import gradients from "static/gradients.json";
-import { formatHEX, formatRGBA, generateGradient } from "utils/colors";
+import { formatRGBA, generateGradient } from "utils/colors";
 
-const ColorPick = ({ index }: { index: number }) => {
+const ColorPickWrapper = ({ total }: { total: number }) => {
   const context = useContext(SetupContext);
 
-  const handleChange = (color: ColorResult): void => {
+  const handleChange = (color: ColorResult, index: number): void => {
     let formattedColor = formatRGBA(color);
     let newColors = [...context?.background.colors!];
     newColors[index] = formattedColor;
@@ -35,29 +31,16 @@ const ColorPick = ({ index }: { index: number }) => {
   };
 
   return (
-    <Popover>
-      <PopoverTrigger>
-        <Box display="flex" gridGap="2">
-          <Button width="5" borderRadius="5" height="10" bg={context?.background.colors[index]!} />
-          {formatHEX(context?.background.colors[index]!)}
-        </Box>
-      </PopoverTrigger>
-      <PopoverContent width="max-content">
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <ChromePicker color={formatRGBA(context?.background.colors[index]!)} onChange={handleChange} />
-      </PopoverContent>
-    </Popover>
-  );
-};
-
-const ColorPickWrapper = ({ total }: { total: number }) => {
-  return (
     <Grid templateColumns="1fr 1fr" flexWrap="wrap" marginY="5" justifyContent="center" gridGap="1rem">
       {Array(total)
         .fill(ColorPick)
         .map((ColorPick, index) => (
-          <ColorPick key={index} index={index} />
+          <ColorPick
+            color={[...context?.background.colors!][index]}
+            key={index}
+            index={index}
+            callback={(color: ColorResult) => handleChange(color, index)}
+          />
         ))}
     </Grid>
   );
@@ -92,7 +75,7 @@ const PrebuiltPicker = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody display="grid" gridGap="5" justifyContent="center" gridTemplateColumns="120px 120px 120px 120px">
-            {gradients.map((gradient, index) => (
+            {gradients.slice(0, 50).map((gradient, index) => (
               <Button
                 key={index}
                 onClick={() => handlePick(gradient.colors)}

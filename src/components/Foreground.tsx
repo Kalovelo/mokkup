@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { useContext } from "react";
 import { generateGradient } from "utils/colors";
 import BrowserWindow from "./BrowserWindow/BrowserWindow";
-import { SetupContext } from "./Context/Context";
+import { SetupContext } from "./Context";
 
 const Foreground = () => {
   const foregroundRef = useRef(null);
