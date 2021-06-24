@@ -14,9 +14,9 @@ import {
 } from "@chakra-ui/react";
 import { ColorPick } from "components/ColorPicker";
 import { SetupContext } from "components/Context";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ColorResult } from "react-color";
-import { BiMinus, BiPlus } from "react-icons/bi";
+import { BiMinus, BiPlus, BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import gradients from "static/gradients.json";
 import { formatRGBA, generateGradient } from "utils/colors";
 
@@ -50,6 +50,9 @@ const PrebuiltPicker = () => {
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const context = useContext(SetupContext);
+  const colorsPerPage: number = 32;
+  const totalPages: number = Math.floor(gradients.length / colorsPerPage);
+  const [currentPage, setcurrentPage] = useState<number>(0);
 
   const handlePick = (colors: string[]) => {
     onClose();
@@ -67,31 +70,48 @@ const PrebuiltPicker = () => {
 
   return (
     <>
-      <Modal size="xl" isOpen={isOpen} onClose={onClose}>
+      <Modal size="6xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
             <UiGradientsLogo />
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody display="grid" gridGap="5" justifyContent="center" gridTemplateColumns="120px 120px 120px 120px">
-            {gradients.slice(0, 50).map((gradient, index) => (
-              <Button
-                key={index}
-                onClick={() => handlePick(gradient.colors)}
-                display="flex"
-                flexDirection="column"
-                height="150px"
-                gridGap="3"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Box boxShadow="2xl" width="50px" height="50px" borderRadius="50%" bgGradient={generateGradient(gradient.colors)}></Box>
-                <Box height="60px" display="flex" alignItems="center">
-                  <span style={{ whiteSpace: "break-spaces" }}>{gradient.name}</span>
-                </Box>
-              </Button>
-            ))}
+          <ModalBody display="grid" gridGap="5">
+            <Box display="flex" justifyContent="space-between" gridGap="10px"></Box>
+            <Box display="grid" gridGap="5" justifyContent="center" gridTemplateColumns="repeat(auto-fill, 120px)">
+              {gradients.slice(currentPage * colorsPerPage, (currentPage + 1) * colorsPerPage).map((gradient, index) => (
+                <Button
+                  key={index}
+                  onClick={() => handlePick(gradient.colors)}
+                  display="flex"
+                  flexDirection="column"
+                  height="150px"
+                  gridGap="3"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Box boxShadow="2xl" width="50px" height="50px" borderRadius="50%" bgGradient={generateGradient(gradient.colors)}></Box>
+                  <Box height="60px" display="flex" alignItems="center">
+                    <span style={{ whiteSpace: "break-spaces" }}>{gradient.name}</span>
+                  </Box>
+                </Button>
+              ))}
+            </Box>
+            <Box display="flex" justifyContent="space-between" gridGap="10px">
+              <IconButton
+                isDisabled={currentPage === 0}
+                aria-label="Previous Gradient Page"
+                onClick={() => setcurrentPage(currentPage - 1)}
+                icon={<BiLeftArrow />}
+              />
+              <IconButton
+                isDisabled={currentPage === totalPages}
+                aria-label="Next Gradient Page"
+                onClick={() => setcurrentPage(currentPage + 1)}
+                icon={<BiRightArrow />}
+              />
+            </Box>
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -104,10 +124,10 @@ const PrebuiltPicker = () => {
 
 const BackgroundPicker = () => {
   const context = useContext(SetupContext);
-  const colors = context?.background.colors!;
+  const colors: string[] = context?.background.colors!;
 
   const removeColor = () => {
-    let newColors = [...colors];
+    let newColors: string[] = [...colors];
     newColors.pop();
     context?.setBackground({ colors: newColors });
   };
