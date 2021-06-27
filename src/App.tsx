@@ -20,6 +20,7 @@ const config: ChakraConfig = {
 const theme = extendTheme({
   config,
   fonts: {
+    heading: "Manrope",
     body: "Manrope",
   },
 });

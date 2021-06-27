@@ -14,8 +14,8 @@ const Toolbox = () => {
     <Accordion defaultIndex={[0]} allowMultiple>
       {pickers.map((picker, index) => (
         <AccordionItem key={index}>
-          <AccordionButton>
-            <Box fontWeight="bold" flex="1" textAlign="left">
+          <AccordionButton fontSize="1.4rem">
+            <Box flex="1" textAlign="left">
               <h2>{picker.title}</h2>
             </Box>
             <AccordionIcon />

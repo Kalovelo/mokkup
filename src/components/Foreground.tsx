@@ -14,7 +14,7 @@ const Foreground = () => {
   const background = () => {
     if (colors.length === 0) return { bg: "transparent" };
     if (colors.length === 1) return { bg: colors[0] };
-    return { bgGradient: generateGradient(colors) };
+    return { bgGradient: generateGradient(colors, direction) };
   };
 
   const saveAs = (uri: string, filename: string) => {

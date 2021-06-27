@@ -7,10 +7,10 @@ export const ColorPick = ({ callback, color }: { callback: ColorChangeHandler; c
   return (
     <Popover>
       <PopoverTrigger>
-        <Box display="flex" gridGap="2">
-          <Button width="5" borderRadius="5" height="10" bg={color} />
+        <Button display="flex" fontWeight="100" justifyContent="space-between" paddingY="10px" paddingLeft="0" paddingRight="10%">
+          <Box width="10" borderRadius="5" height="10" bg={color}></Box>
           {formatHEX(color)}
-        </Box>
+        </Button>
       </PopoverTrigger>
       <PopoverContent width="max-content">
         <PopoverArrow />

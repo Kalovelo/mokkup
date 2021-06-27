@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Grid,
+  Heading,
   IconButton,
   Modal,
   ModalBody,
@@ -16,9 +17,11 @@ import { ColorPick } from "components/ColorPicker";
 import { SetupContext } from "components/Context";
 import React, { useContext, useState } from "react";
 import { ColorResult } from "react-color";
-import { BiMinus, BiPlus, BiRightArrow, BiLeftArrow } from "react-icons/bi";
+import { BiMinus, BiPlus, BiRightArrow, BiLeftArrow, BiRotateLeft, BiRotateRight } from "react-icons/bi";
 import gradients from "static/gradients.json";
 import { formatRGBA, generateGradient } from "utils/colors";
+
+const directions: string[] = ["to-t", "to-tr", "to-r", "to-br", "to-b", "to-bl", "to-l", "to-tl"];
 
 const ColorPickWrapper = ({ total }: { total: number }) => {
   const context = useContext(SetupContext);
@@ -27,11 +30,11 @@ const ColorPickWrapper = ({ total }: { total: number }) => {
     let formattedColor = formatRGBA(color);
     let newColors = [...context?.background.colors!];
     newColors[index] = formattedColor;
-    context?.setBackground({ colors: newColors });
+    context?.setBackgroundColors(newColors);
   };
 
   return (
-    <Grid templateColumns="1fr 1fr" flexWrap="wrap" marginY="5" justifyContent="center" gridGap="1rem">
+    <Grid templateColumns="1fr 1fr" flexWrap="wrap" justifyContent="center" gridGap="1rem">
       {Array(total)
         .fill(ColorPick)
         .map((ColorPick, index) => (
@@ -56,7 +59,7 @@ const PrebuiltPicker = () => {
 
   const handlePick = (colors: string[]) => {
     onClose();
-    context?.setBackground({ colors: [...colors] });
+    context!.setBackgroundColors(colors);
   };
 
   const UiGradientsLogo = () => (
@@ -129,21 +132,59 @@ const BackgroundPicker = () => {
   const removeColor = () => {
     let newColors: string[] = [...colors];
     newColors.pop();
-    context?.setBackground({ colors: newColors });
+    context?.setBackgroundColors(newColors);
   };
 
   const addColor = () => {
-    context?.setBackground({ colors: [...colors!, "#ccc"] });
+    context?.setBackgroundColors([...colors!, "#cccccc"]);
+  };
+
+  const rotate = (direction: string) => {
+    const currentDirection = context!.background.direction;
+    const index = directions.indexOf(currentDirection);
+    if (direction == "right") {
+      if (index === directions.length - 1) return context!.setDirection(directions[0]);
+      context!.setDirection(directions[index + 1]);
+    } else {
+      if (index === 0) return context!.setDirection(directions[directions.length - 1]);
+      context!.setDirection(directions[index - 1]);
+    }
   };
 
   return (
-    <Grid>
-      <Box display="flex" gridGap="6">
-        <IconButton aria-label="Remove color" icon={<BiMinus />} isDisabled={colors.length < 2} onClick={removeColor} />
-        <IconButton aria-label="Add color" icon={<BiPlus />} isDisabled={colors.length > 3} onClick={addColor} />
+    <Grid gridGap="10">
+      <Box display="flex" gridGap="6" alignItems="center">
+        <Heading as="h6" width="80px" fontSize="md" marginRight="auto">
+          Options:
+        </Heading>
+        <IconButton borderRadius="50%" size="sm" aria-label="Remove color" icon={<BiMinus />} isDisabled={colors.length < 2} onClick={removeColor} />
+        <IconButton borderRadius="50%" size="sm" aria-label="Add color" icon={<BiPlus />} isDisabled={colors.length > 3} onClick={addColor} />
       </Box>
       <ColorPickWrapper total={colors.length} />
       <PrebuiltPicker />
+      <Box display="flex" gridGap="6" alignItems="center">
+        <Heading as="h6" width="80px" fontSize="md" justifySelf="flex-start" marginRight="auto">
+          Direction:
+        </Heading>
+        <IconButton
+          size="sm"
+          borderRadius="50%"
+          aria-label="Rotate gradients left"
+          isDisabled={colors.length < 2}
+          alignSelf="flex-end"
+          icon={<BiRotateLeft />}
+          onClick={() => rotate("left")}
+        />
+        <IconButton
+          size="sm"
+          borderRadius="50%"
+          aria-label="Rotate gradients right"
+          isDisabled={colors.length < 2}
+          justifySelf="flex-end"
+          icon={<BiRotateRight />}
+          onClick={() => rotate("right")}
+        />
+      </Box>
     </Grid>
   );
 };

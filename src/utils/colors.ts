@@ -1,8 +1,8 @@
 import { ColorResult, Color, RGBColor } from "react-color";
 
-export const generateGradient = (colors: string[]) => {
+export const generateGradient = (colors: string[], direction?: string) => {
   const reducer = (accumulator: string, currentValue: string) => accumulator + currentValue + ",";
-  let gradient = colors.reduce(reducer, `linear(to-r,`);
+  let gradient = colors.reduce(reducer, `linear(${direction || "to-r"},`);
   gradient += ")";
   return gradient;
 };
