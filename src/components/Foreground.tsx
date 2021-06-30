@@ -1,7 +1,6 @@
-import { Flex, Image } from "@chakra-ui/react";
+import { Box, Flex, Image } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
-import React, { useRef } from "react";
-import { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { generateGradient } from "utils/colors";
 import BrowserWindow from "./BrowserWindow/BrowserWindow";
 import { SetupContext } from "./Context";
@@ -9,7 +8,9 @@ import { SetupContext } from "./Context";
 const Foreground = () => {
   const foregroundRef = useRef(null);
 
-  const { colors, direction } = useContext(SetupContext)!.background;
+  const context = useContext(SetupContext)!;
+  const { colors, direction } = context.background;
+  const image = context.image;
 
   const background = () => {
     if (colors.length === 0) return { bg: "transparent" };
@@ -38,15 +39,17 @@ const Foreground = () => {
   };
 
   const clickHandler = () => {
-    html2canvas(foregroundRef.current!).then(function (canvas) {
+    html2canvas(foregroundRef.current!, { allowTaint: true }).then((canvas) => {
       saveAs(canvas.toDataURL(), "mokkup-ui.jpg");
     });
   };
 
   return (
     <Flex ref={foregroundRef} onClick={clickHandler} justifyContent="center" flexDirection="column" {...background()} p="10%">
-      <BrowserWindow />
-      <Image w="100" src="../../test.jpg" />
+      <Box>
+        <BrowserWindow />
+        <Image w="100%" src={image!} />
+      </Box>
     </Flex>
   );
 };

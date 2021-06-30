@@ -17,7 +17,7 @@ import { ColorPick } from "components/ColorPicker";
 import { SetupContext } from "components/Context";
 import React, { useContext, useState } from "react";
 import { ColorResult } from "react-color";
-import { BiMinus, BiPlus, BiRightArrow, BiLeftArrow, BiRotateLeft, BiRotateRight } from "react-icons/bi";
+import { BiLeftArrow, BiMinus, BiPlus, BiRightArrow, BiRotateLeft, BiRotateRight } from "react-icons/bi";
 import gradients from "static/gradients.json";
 import { formatRGBA, generateGradient } from "utils/colors";
 
@@ -142,7 +142,7 @@ const BackgroundPicker = () => {
   const rotate = (direction: string) => {
     const currentDirection = context!.background.direction;
     const index = directions.indexOf(currentDirection);
-    if (direction == "right") {
+    if (direction === "right") {
       if (index === directions.length - 1) return context!.setDirection(directions[0]);
       context!.setDirection(directions[index + 1]);
     } else {

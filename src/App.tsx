@@ -1,11 +1,11 @@
 import { Box, ChakraProvider, ColorMode, extendTheme, Grid, GridItem } from "@chakra-ui/react";
+import "@fontsource/manrope/400.css"; // Defaults to weight 400.
+import "@fontsource/manrope/700.css"; // Defaults to weight 400.
 import * as React from "react";
+import { ContextProvider } from "./components/Context";
 import Foreground from "./components/Foreground";
 import Header from "./components/Header";
 import Toolbox from "./components/Toolbox/Toolbox";
-import "@fontsource/manrope/700.css"; // Defaults to weight 400.
-import "@fontsource/manrope/400.css"; // Defaults to weight 400.
-import { ContextProvider } from "./components/Context";
 
 export interface ChakraConfig {
   initialColorMode: ColorMode;
