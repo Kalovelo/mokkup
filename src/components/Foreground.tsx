@@ -1,7 +1,7 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import React, { useContext, useRef } from "react";
-import { generateGradient } from "utils/colors";
+import { generateGradient, generateShadow } from "utils/colors";
 import BrowserWindow from "./BrowserWindow/BrowserWindow";
 import { SetupContext } from "./Context";
 
@@ -10,6 +10,7 @@ const Foreground = () => {
 
   const context = useContext(SetupContext)!;
   const { colors, direction } = context.background;
+
   const image = context.image;
 
   const background = () => {
@@ -17,6 +18,8 @@ const Foreground = () => {
     if (colors.length === 1) return { bg: colors[0] };
     return { bgGradient: generateGradient(colors, direction) };
   };
+
+  const shadow = () => generateShadow(context.shadow);
 
   const saveAs = (uri: string, filename: string) => {
     var link = document.createElement("a");
@@ -45,8 +48,8 @@ const Foreground = () => {
   };
 
   return (
-    <Flex ref={foregroundRef} onClick={clickHandler} justifyContent="center" flexDirection="column" {...background()} p="10%">
-      <Box>
+    <Flex overflow="hidden" ref={foregroundRef} onClick={clickHandler} justifyContent="center" flexDirection="column" {...background()} p="10%">
+      <Box style={{ boxShadow: shadow() }}>
         <BrowserWindow />
         <Image w="100%" src={image!} />
       </Box>

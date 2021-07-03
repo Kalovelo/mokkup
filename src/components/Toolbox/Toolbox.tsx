@@ -1,13 +1,22 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Grid } from "@chakra-ui/react";
 import ImagePicker from "components/ImagePicker";
+import ShadowPicker from "components/ShadowPicker";
 import React from "react";
 import BackgroundPicker from "../BackgroundPicker";
 
+type Picker = {
+  title: string;
+  component: JSX.Element;
+};
 const Toolbox = () => {
-  const pickers = [
+  const pickers: Picker[] = [
     {
       title: "Background",
       component: <BackgroundPicker />,
+    },
+    {
+      title: "Shadow",
+      component: <ShadowPicker />,
     },
   ];
 
@@ -17,7 +26,7 @@ const Toolbox = () => {
       <Accordion defaultIndex={[0]} allowMultiple>
         {pickers.map((picker, index) => (
           <AccordionItem key={index}>
-            <AccordionButton fontSize="1.4rem">
+            <AccordionButton fontSize="1rem">
               <Box flex="1" textAlign="left">
                 <h2>{picker.title}</h2>
               </Box>

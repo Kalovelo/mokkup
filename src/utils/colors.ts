@@ -7,6 +7,10 @@ export const generateGradient = (colors: string[], direction?: string) => {
   return gradient;
 };
 
+export const generateShadow = ({ x, y, blur, spread, color }: { x: number; y: number; blur: number; spread: number; color: string }) => {
+  return `${x}px ${y}px ${blur}px ${spread}px ${color}`;
+};
+
 export const formatRGBA = (color: ColorResult | Color | string): string => {
   if ((color as ColorResult).rgb) {
     const { r, g, b, a } = (color as ColorResult).rgb;

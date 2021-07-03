@@ -2,6 +2,8 @@ import { Button } from "@chakra-ui/react";
 import { SetupContext } from "components/Context";
 import React from "react";
 
+const ALLOWED_FILE_TYPES = ["image/png", "image/jpeg", "image/gif"];
+
 const ImagePicker = () => {
   const context = React.useContext(SetupContext);
   const inputRef = React.useRef<HTMLLabelElement>(null);
@@ -15,8 +17,11 @@ const ImagePicker = () => {
 
   const uploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     let files = e.target.files;
-    const url = URL.createObjectURL(files![0]);
-    context?.setImage(url);
+
+    if (ALLOWED_FILE_TYPES.includes(files![0].type)) {
+      const url = URL.createObjectURL(files![0]);
+      context?.setImage(url);
+    } else alert("That's not an Image 😠 Try again!");
   };
 
   return (
