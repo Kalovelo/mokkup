@@ -1,8 +1,10 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Grid } from "@chakra-ui/react";
+import BackgroundPicker from "components/BackgroundPicker";
+import DevicePicker from "components/DevicePicker";
 import ImagePicker from "components/ImagePicker";
 import ShadowPicker from "components/ShadowPicker";
 import React from "react";
-import BackgroundPicker from "../../components/BackgroundPicker";
+import { BACKGROUND_TITLE, DEVICE_TITLE, SHADOW_TITLE } from "./constants";
 
 type Picker = {
   title: string;
@@ -11,12 +13,16 @@ type Picker = {
 const Toolbox = () => {
   const pickers: Picker[] = [
     {
-      title: "Background",
+      title: BACKGROUND_TITLE,
       component: <BackgroundPicker />,
     },
     {
-      title: "Shadow",
+      title: SHADOW_TITLE,
       component: <ShadowPicker />,
+    },
+    {
+      title: DEVICE_TITLE,
+      component: <DevicePicker />,
     },
   ];
 

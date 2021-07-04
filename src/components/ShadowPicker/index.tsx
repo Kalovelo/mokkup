@@ -20,7 +20,6 @@ const ShadowPicker: React.FC = () => {
     const newShadow = { ...context.shadow };
     newShadow.color = formattedColor;
     context.setShadow(newShadow);
-    console.log(context.shadow.color);
   };
 
   const changeX = (x: number) => {

@@ -35,7 +35,7 @@ const WrapRadio: React.FC<WrapRadioProps> = ({ radioProps, children, tooltip }) 
             boxShadow: "outline",
           }}
           p={4}
-          py={4}
+          py={3}
         >
           {children}
         </Box>

@@ -13,8 +13,6 @@ const ImagePicker: React.FC = () => {
     sethasImage(!!context?.image);
   }, [context?.image]);
 
-  console.log("zzax");
-
   const triggerUploadFile = () => inputRef.current?.click();
 
   const uploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {

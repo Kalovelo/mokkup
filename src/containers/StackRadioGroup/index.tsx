@@ -5,7 +5,7 @@ import WrapRadio from "../../components/WrapRadio";
 type StackRadioGroupProps = {
   options: { value: string | number; label: JSX.Element }[];
   name: string;
-  callback?: (nextValue: string) => void;
+  callback?: (nextValue: any) => void;
   defaultValue?: string;
 };
 
@@ -19,7 +19,7 @@ const StackRadioGroup: React.FC<StackRadioGroupProps> = ({ options, name, callba
   const group = getRootProps();
 
   return (
-    <HStack flexWrap="wrap" justifyContent="center" {...group} gridGap="1rem">
+    <HStack flexWrap="wrap" {...group} gridGap="1rem">
       {options.map((option) => {
         const radio = getRadioProps({ ...getRadioProps(), value: option.value });
         return (

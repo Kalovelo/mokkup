@@ -1,8 +1,8 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
+import DeviceWrapper from "containers/DeviceWrapper";
 import html2canvas from "html2canvas";
 import React, { useContext, useRef } from "react";
-import { generateGradient, generateShadow } from "utils/colors";
-import BrowserWindow from "./BrowserWindow";
+import { generateGradient } from "utils/colors";
 import { SetupContext } from "../Context";
 
 const Foreground = () => {
@@ -18,8 +18,6 @@ const Foreground = () => {
     if (colors.length === 1) return { bg: colors[0] };
     return { bgGradient: generateGradient(colors, direction) };
   };
-
-  const shadow = () => generateShadow(context.shadow);
 
   const saveAs = (uri: string, filename: string) => {
     var link = document.createElement("a");
@@ -49,10 +47,7 @@ const Foreground = () => {
 
   return (
     <Flex overflow="hidden" ref={foregroundRef} onClick={clickHandler} justifyContent="center" flexDirection="column" {...background()} p="10%">
-      <Box style={{ boxShadow: shadow() }}>
-        <BrowserWindow />
-        <Image w="100%" src={image!} />
-      </Box>
+      <DeviceWrapper image={image!} />
     </Flex>
   );
 };
