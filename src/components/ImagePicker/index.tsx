@@ -1,11 +1,11 @@
 import { Button } from "@chakra-ui/react";
-import { SetupContext } from "Context";
+import { ImageContext } from "contexts/Image";
 import React from "react";
 
 const ALLOWED_FILE_TYPES = ["image/png", "image/jpeg", "image/gif"];
 
 const ImagePicker: React.FC = () => {
-  const context = React.useContext(SetupContext);
+  const context = React.useContext(ImageContext);
   const inputRef = React.useRef<HTMLLabelElement>(null);
   const [hasImage, sethasImage] = React.useState<boolean>(false);
 

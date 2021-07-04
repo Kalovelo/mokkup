@@ -1,17 +1,19 @@
 import { Flex } from "@chakra-ui/react";
 import DeviceWrapper from "containers/DeviceWrapper";
+import { BackgroundContext } from "contexts/Background";
+import { ImageContext } from "contexts/Image";
 import html2canvas from "html2canvas";
 import React, { useContext, useRef } from "react";
 import { generateGradient } from "utils/colors";
-import { SetupContext } from "../Context";
 
 const Foreground = () => {
   const foregroundRef = useRef(null);
 
-  const context = useContext(SetupContext)!;
-  const { colors, direction } = context.background;
+  const backgroundContext = useContext(BackgroundContext)!;
+  const imageContext = useContext(ImageContext)!;
+  const { colors, direction } = backgroundContext.background;
 
-  const image = context.image;
+  const image = imageContext.image;
 
   const background = () => {
     if (colors.length === 0) return { bg: "transparent" };

@@ -1,6 +1,6 @@
 import { Grid, GridItem, InputGroup, InputLeftAddon, NumberInput, NumberInputField, Text, Tooltip } from "@chakra-ui/react";
 import ColorPicker from "components/ColorPicker";
-import { SetupContext } from "Context";
+import { ShadowContext } from "contexts/Shadow";
 import React from "react";
 import { ColorResult } from "react-color";
 import { formatRGBA } from "utils/colors";
@@ -13,7 +13,7 @@ type gridItem = {
 };
 
 const ShadowPicker: React.FC = () => {
-  const context = React.useContext(SetupContext)!;
+  const context = React.useContext(ShadowContext)!;
 
   const changeColor = (color: ColorResult): void => {
     const formattedColor = formatRGBA(color);

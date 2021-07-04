@@ -1,14 +1,14 @@
 import { Box, Grid, Heading, IconButton } from "@chakra-ui/react";
-import { SetupContext } from "Context";
 import ColorPickWrapper from "containers/ColorPickWrapper";
 import React, { useContext } from "react";
 import { BiMinus, BiPlus, BiRotateLeft, BiRotateRight } from "react-icons/bi";
 import PrebuiltPicker from "./PreBuiltPicker";
+import { BackgroundContext } from "contexts/Background";
 
 const directions: string[] = ["to-t", "to-tr", "to-r", "to-br", "to-b", "to-bl", "to-l", "to-tl"];
 
 const BackgroundPicker: React.FC = () => {
-  const context = useContext(SetupContext)!;
+  const context = useContext(BackgroundContext)!;
   const colors: string[] = context.background.colors;
 
   const removeColor = () => {

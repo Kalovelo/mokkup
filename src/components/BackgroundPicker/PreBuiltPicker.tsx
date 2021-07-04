@@ -11,18 +11,18 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
-import { SetupContext } from "Context";
 import React, { useState, useContext } from "react";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { generateGradient } from "utils/colors";
 import UiGradientsLogo from "./UiGradientsLogo";
 import gradients from "static/gradients.json";
+import { BackgroundContext } from "contexts/Background";
 
 const PrebuiltPicker: React.FC = () => {
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentPage, setcurrentPage] = useState<number>(0);
-  const context = useContext(SetupContext)!;
+  const context = useContext(BackgroundContext)!;
 
   const colorsPerPage: number = 32;
   const totalPages: number = Math.floor(gradients.length / colorsPerPage);
