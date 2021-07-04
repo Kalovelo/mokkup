@@ -1,6 +1,6 @@
-import { Box, Flex, Grid, GridItem, InputGroup, InputLeftAddon, NumberInput, NumberInputField, Text, Tooltip } from "@chakra-ui/react";
-import { ColorPick } from "components/ColorPicker";
-import { SetupContext } from "components/Context";
+import { Grid, GridItem, InputGroup, InputLeftAddon, NumberInput, NumberInputField, Text, Tooltip } from "@chakra-ui/react";
+import ColorPicker from "components/ColorPicker";
+import { SetupContext } from "Context";
 import React from "react";
 import { ColorResult } from "react-color";
 import { formatRGBA } from "utils/colors";
@@ -12,7 +12,7 @@ type gridItem = {
   value: number;
 };
 
-const ShadowPicker = () => {
+const ShadowPicker: React.FC = () => {
   const context = React.useContext(SetupContext)!;
 
   const changeColor = (color: ColorResult): void => {
@@ -75,7 +75,7 @@ const ShadowPicker = () => {
   return (
     <Grid gridGap="0.5rem" templateColumns=" repeat(4,6rem)">
       <GridItem marginY="2" gridColumn="1/3">
-        <ColorPick color={context.shadow.color} callback={(color: ColorResult) => changeColor(color)} />
+        <ColorPicker color={context.shadow.color} callback={(color: ColorResult) => changeColor(color)} />
       </GridItem>
       <Text gridColumn="3/-1" display="flex" alignItems="center" justifyContent="center" textAlign="center" fontSize=".9rem">
         💡 Each value is in px.

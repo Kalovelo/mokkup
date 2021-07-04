@@ -1,10 +1,10 @@
 import { Button } from "@chakra-ui/react";
-import { SetupContext } from "components/Context";
+import { SetupContext } from "Context";
 import React from "react";
 
 const ALLOWED_FILE_TYPES = ["image/png", "image/jpeg", "image/gif"];
 
-const ImagePicker = () => {
+const ImagePicker: React.FC = () => {
   const context = React.useContext(SetupContext);
   const inputRef = React.useRef<HTMLLabelElement>(null);
   const [hasImage, sethasImage] = React.useState<boolean>(false);
@@ -12,6 +12,8 @@ const ImagePicker = () => {
   React.useEffect(() => {
     sethasImage(!!context?.image);
   }, [context?.image]);
+
+  console.log("zzax");
 
   const triggerUploadFile = () => inputRef.current?.click();
 
@@ -36,4 +38,4 @@ const ImagePicker = () => {
   );
 };
 
-export default ImagePicker;
+export default React.memo(ImagePicker);

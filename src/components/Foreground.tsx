@@ -2,8 +2,8 @@ import { Box, Flex, Image } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import React, { useContext, useRef } from "react";
 import { generateGradient, generateShadow } from "utils/colors";
-import BrowserWindow from "./BrowserWindow/BrowserWindow";
-import { SetupContext } from "./Context";
+import BrowserWindow from "./BrowserWindow";
+import { SetupContext } from "../Context";
 
 const Foreground = () => {
   const foregroundRef = useRef(null);

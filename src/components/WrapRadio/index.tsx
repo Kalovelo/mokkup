@@ -3,14 +3,14 @@ import { useRadio, UseRadioProps, Tooltip } from "@chakra-ui/react";
 import React from "react";
 import { Key } from "react";
 
-interface IWrapRadioProps {
+type WrapRadioProps = {
   radioProps: UseRadioProps;
   key?: Key | null;
   children: JSX.Element;
   tooltip: string;
-}
+};
 
-const WrapRadio = ({ radioProps, children, tooltip }: IWrapRadioProps) => {
+const WrapRadio: React.FC<WrapRadioProps> = ({ radioProps, children, tooltip }) => {
   const { getInputProps, getCheckboxProps } = useRadio(radioProps);
 
   const input = getInputProps();
@@ -44,4 +44,4 @@ const WrapRadio = ({ radioProps, children, tooltip }: IWrapRadioProps) => {
   );
 };
 
-export default WrapRadio;
+export default React.memo(WrapRadio);

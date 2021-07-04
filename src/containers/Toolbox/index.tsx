@@ -2,7 +2,7 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 import ImagePicker from "components/ImagePicker";
 import ShadowPicker from "components/ShadowPicker";
 import React from "react";
-import BackgroundPicker from "../BackgroundPicker";
+import BackgroundPicker from "../../components/BackgroundPicker";
 
 type Picker = {
   title: string;

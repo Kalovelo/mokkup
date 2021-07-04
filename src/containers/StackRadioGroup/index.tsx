@@ -1,14 +1,15 @@
 import { HStack, useRadioGroup } from "@chakra-ui/react";
 import React from "react";
-import WrapRadio from "../WrapRadio/WrapRadio";
+import WrapRadio from "../../components/WrapRadio";
 
-interface IStackRadioGroupProps {
+type StackRadioGroupProps = {
   options: { value: string | number; label: JSX.Element }[];
   name: string;
   callback?: (nextValue: string) => void;
   defaultValue?: string;
-}
-const StackRadioGroup = ({ options, name, callback, defaultValue }: IStackRadioGroupProps) => {
+};
+
+const StackRadioGroup: React.FC<StackRadioGroupProps> = ({ options, name, callback, defaultValue }) => {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: name,
     defaultValue,
@@ -31,4 +32,4 @@ const StackRadioGroup = ({ options, name, callback, defaultValue }: IStackRadioG
   );
 };
 
-export default StackRadioGroup;
+export default React.memo(StackRadioGroup);

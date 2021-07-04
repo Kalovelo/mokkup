@@ -1,7 +1,7 @@
 import React from "react";
 import "./BrowserWindow.css";
 
-const BrowserWindow = () => {
+const BrowserWindow: React.FC = () => {
   return (
     <div className="BrowserWindow">
       <div className="BrowserWindow__row">
@@ -23,4 +23,4 @@ const BrowserWindow = () => {
   );
 };
 
-export default BrowserWindow;
+export default React.memo(BrowserWindow);

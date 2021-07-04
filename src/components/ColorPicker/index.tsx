@@ -3,7 +3,9 @@ import React from "react";
 import { ChromePicker, ColorChangeHandler } from "react-color";
 import { formatHEX, formatRGBA } from "utils/colors";
 
-export const ColorPick = ({ callback, color }: { callback: ColorChangeHandler; color: string }) => {
+type ColorPickProps = { callback: ColorChangeHandler; color: string };
+
+const ColorPicker: React.FC<ColorPickProps> = ({ callback, color }) => {
   return (
     <Popover>
       <PopoverTrigger>
@@ -20,3 +22,5 @@ export const ColorPick = ({ callback, color }: { callback: ColorChangeHandler; c
     </Popover>
   );
 };
+
+export default ColorPicker;
