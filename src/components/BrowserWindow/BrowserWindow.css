@@ -4,7 +4,6 @@
 
 .BrowserWindow__row {
   padding: 7px 10px;
-  background: #f1f1f1;
   display: grid;
   grid-template-columns: 70px 1fr 50px;
 }
@@ -20,6 +19,7 @@
 }
 
 .BrowserWindow__middle {
+  height: 20px;
   display: flex;
   justify-content: center !important;
   align-items: center !important;
@@ -54,8 +54,8 @@
   width: 100%;
   border: none;
   background-color: white;
-  height: 20px;
   padding: 0 5px;
+  height: 100%;
   font-size: 10px !important;
 }
 

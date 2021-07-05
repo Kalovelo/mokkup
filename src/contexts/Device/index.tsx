@@ -1,7 +1,6 @@
-import { BROWSER_TYPE, MOBILE_TYPE, NONE, NONE_TYPE } from "containers/DeviceWrapper/constants";
 import React, { createContext, useState } from "react";
-
-type Device = BROWSER_TYPE | MOBILE_TYPE | NONE_TYPE;
+import { NONE } from "./constants";
+import { Device } from "./types";
 
 type DeviceContextType = {
   device: Device;
@@ -11,7 +10,11 @@ type DeviceContextType = {
 export const DeviceContext = createContext<DeviceContextType | null>(null);
 
 export const DeviceContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [device, setDevice] = useState<Device>(NONE);
+  const defaultState = {
+    title: NONE,
+  };
+
+  const [device, setDevice] = useState<Device>(defaultState);
 
   const providerProps = { device, setDevice };
 
