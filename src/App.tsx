@@ -3,6 +3,7 @@ import "@fontsource/manrope/400.css"; // Defaults to weight 400.
 import "@fontsource/manrope/700.css"; // Defaults to weight 400.
 import { BackgroundContextProvider } from "contexts/Background";
 import { DeviceContextProvider } from "contexts/Device";
+import { DimensionsContextProvider } from "contexts/Dimensions";
 import { ImageContextProvider } from "contexts/Image";
 import { ShadowContextProvider } from "contexts/Shadow";
 import * as React from "react";
@@ -33,19 +34,21 @@ export const App = () => (
     <DeviceContextProvider>
       <ShadowContextProvider>
         <ImageContextProvider>
-          <ChakraProvider theme={theme}>
-            <Box fontSize="xl">
-              <Header />
-              <Grid p="3" gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", md: "450px 800px" }}>
-                <GridItem>
-                  <Toolbox />
-                </GridItem>
-                <GridItem>
-                  <Foreground />
-                </GridItem>
-              </Grid>
-            </Box>
-          </ChakraProvider>
+          <DimensionsContextProvider>
+            <ChakraProvider theme={theme}>
+              <Box fontSize="xl">
+                <Header />
+                <Grid p="3" gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", md: "450px 800px" }}>
+                  <GridItem>
+                    <Toolbox />
+                  </GridItem>
+                  <GridItem>
+                    <Foreground />
+                  </GridItem>
+                </Grid>
+              </Box>
+            </ChakraProvider>
+          </DimensionsContextProvider>
         </ImageContextProvider>
       </ShadowContextProvider>
     </DeviceContextProvider>
