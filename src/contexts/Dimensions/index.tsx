@@ -1,7 +1,6 @@
 import React, { createContext, useState } from "react";
 
 type Dimensions = {
-  padding: number;
   scale: number;
   resolution?: {
     x: number;
@@ -18,7 +17,6 @@ export const DimensionsContext = createContext<DimensionsContextType | null>(nul
 
 export const DimensionsContextProvider = ({ children }: { children: React.ReactNode }) => {
   const defaultDimensions: Dimensions = {
-    padding: 10,
     scale: 1,
     resolution: {
       x: 1200,

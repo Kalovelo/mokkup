@@ -1,6 +1,7 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Grid } from "@chakra-ui/react";
 import BackgroundPicker from "components/BackgroundPicker";
 import DevicePicker from "components/DevicePicker";
+import DimensionPicker from "components/DimensionPicker";
 import ImagePicker from "components/ImagePicker";
 import ShadowPicker from "components/ShadowPicker";
 import React from "react";
@@ -19,6 +20,10 @@ const Toolbox = () => {
     {
       title: SHADOW_TITLE,
       component: <ShadowPicker />,
+    },
+    {
+      title: "Dimensions",
+      component: <DimensionPicker />,
     },
     {
       title: DEVICE_TITLE,

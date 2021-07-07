@@ -1,12 +1,11 @@
 import { Box } from "@chakra-ui/layout";
-import { useRadio, UseRadioProps, Tooltip } from "@chakra-ui/react";
-import React from "react";
-import { Key } from "react";
+import { Flex, Tooltip, useRadio, UseRadioProps } from "@chakra-ui/react";
+import React, { Key } from "react";
 
 type WrapRadioProps = {
   radioProps: UseRadioProps;
   key?: Key | null;
-  children: JSX.Element;
+  children: JSX.Element | string;
   tooltip: string;
 };
 
@@ -20,11 +19,17 @@ const WrapRadio: React.FC<WrapRadioProps> = ({ radioProps, children, tooltip }) 
     <Tooltip label={tooltip} aria-label={tooltip}>
       <Box as="label">
         <input {...input} />
-        <Box
+        <Flex
           {...checkbox}
+          maxW={typeof children === "string" ? "7rem" : ""}
+          w={typeof children === "string" ? "" : "50px"}
+          textAlign="center"
+          justifyContent="center"
+          alignItems="center"
+          h="100%"
           cursor="pointer"
           borderWidth="1px"
-          borderRadius="50%"
+          borderRadius={typeof children === "string" ? "10px" : "50%"}
           boxShadow="md"
           _checked={{
             bg: "teal.600",
@@ -34,11 +39,11 @@ const WrapRadio: React.FC<WrapRadioProps> = ({ radioProps, children, tooltip }) 
           _focus={{
             boxShadow: "outline",
           }}
-          p={4}
-          py={3}
+          px={2}
+          py={typeof children === "string" ? 2 : 4}
         >
           {children}
-        </Box>
+        </Flex>
       </Box>
     </Tooltip>
   );

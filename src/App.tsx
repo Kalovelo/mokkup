@@ -7,7 +7,7 @@ import { DimensionsContextProvider } from "contexts/Dimensions";
 import { ImageContextProvider } from "contexts/Image";
 import { ShadowContextProvider } from "contexts/Shadow";
 import * as React from "react";
-import Foreground from "./components/Foreground";
+import Foreground from "./containers/Foreground";
 import Header from "./components/Header";
 import Toolbox from "./containers/Toolbox";
 

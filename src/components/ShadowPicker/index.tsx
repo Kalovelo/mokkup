@@ -4,6 +4,7 @@ import { ShadowContext } from "contexts/Shadow";
 import React from "react";
 import { ColorResult } from "react-color";
 import { formatRGBA } from "utils/colors";
+import { parseNumberInput } from "utils/validation";
 
 type gridItem = {
   label: string;
@@ -43,29 +44,27 @@ const ShadowPicker: React.FC = () => {
     context.setShadow(newShadow);
   };
 
-  const parse = (val: string) => parseInt(val.replace(/[a-z]/gi, ""));
-
   const gridItems: gridItem[] = [
     {
-      label: "X",
+      label: "X:",
       callback: changeX,
       tooltip: "Horizontial Offset",
       value: context.shadow.x,
     },
     {
-      label: "Y",
+      label: "Y:",
       callback: changeY,
       tooltip: "Vertical Offset",
       value: context.shadow.y,
     },
     {
-      label: "B",
+      label: "B:",
       callback: changeBlur,
       tooltip: "Blur Radius",
       value: context.shadow.blur,
     },
     {
-      label: "S",
+      label: "S:",
       callback: changeSpread,
       tooltip: "Spread Radius",
       value: context.shadow.spread,
@@ -79,15 +78,14 @@ const ShadowPicker: React.FC = () => {
       <Text gridColumn="3/-1" display="flex" alignItems="center" justifyContent="center" textAlign="center" fontSize=".9rem">
         💡 Each value is in px.
       </Text>
-      {/* <Flex flexWrap="wrap" gridGap="1rem" alignItems="center"> */}
       {gridItems.map(({ label, callback, tooltip, value }, index) => (
         <GridItem gridRow="2" key={index} display="flex" gridGap="1rem" alignItems="center">
           <InputGroup>
             <Tooltip label={tooltip}>
               <InputLeftAddon fontSize=".9rem" justifyContent="center" children={label} />
             </Tooltip>
-            <NumberInput inputMode="numeric" placeholder="0" defaultValue={value} onChange={(val) => callback(parse(val))}>
-              <NumberInputField p="2" />
+            <NumberInput inputMode="numeric" placeholder="0" defaultValue={value} onChange={(val) => callback(parseNumberInput(val))}>
+              <NumberInputField textAlign="center" p="2" />
             </NumberInput>
           </InputGroup>
         </GridItem>

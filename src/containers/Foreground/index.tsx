@@ -7,6 +7,7 @@ import { toPng } from "html-to-image";
 import React, { useContext, useRef } from "react";
 import { generateGradient } from "utils/colors";
 import { saveAs } from "utils/saveAs";
+import { resolutionDivider } from "../../utils/resizers";
 
 const Foreground = () => {
   const foregroundRef = useRef<HTMLDivElement>(null);
@@ -15,39 +16,17 @@ const Foreground = () => {
   const imageContext = useContext(ImageContext)!;
   const dimensionsContext = useContext(DimensionsContext)!;
 
-  const [imageStyles, setimageStyles] = React.useState<{ w?: string; h?: string }>({});
+  const width = dimensionsContext.dimensions.resolution?.x!;
+  const height = dimensionsContext.dimensions.resolution?.y!;
+
+  const imageDimensions = {
+    w: `${width / resolutionDivider(width, height)}px`,
+    h: `${height / resolutionDivider(height, height)}px`,
+  };
 
   const { colors, direction } = backgroundContext.background;
   const image = imageContext.image;
   const imageScale = dimensionsContext.dimensions.scale;
-  const resolutionDivider = 1.2;
-
-  React.useEffect(() => {
-    const width = dimensionsContext.dimensions.resolution?.x!;
-    const height = dimensionsContext.dimensions.resolution?.y!;
-
-    const getUploadedImageDimensions = () => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () =>
-          resolve({
-            w: `${img.width / resolutionDivider}px`,
-            h: `${img.height / resolutionDivider}px`,
-          });
-        img.src = imageContext.image!;
-      });
-    };
-
-    const resetImageDimensions = async () =>
-      width && height
-        ? setimageStyles({
-            w: width > 800 || height > 500 ? `${width / resolutionDivider}px` : `${width}px`,
-            h: width > 800 || height > 500 ? `${height / resolutionDivider}px` : `${height}px`,
-          })
-        : setimageStyles((await getUploadedImageDimensions()) as { w?: string; h?: string });
-
-    resetImageDimensions();
-  }, [dimensionsContext.dimensions.resolution?.x, dimensionsContext.dimensions.resolution?.y, imageContext.image]);
 
   const background = () => {
     if (colors.length === 0) return { bg: "transparent" };
@@ -56,7 +35,7 @@ const Foreground = () => {
   };
 
   const screenshot = () => {
-    toPng(foregroundRef.current!, { pixelRatio: resolutionDivider }).then((canvas) => {
+    toPng(foregroundRef.current!, { pixelRatio: resolutionDivider(height, height) }).then((canvas) => {
       return saveAs(canvas, "mokkup.jpg");
     });
   };
@@ -66,14 +45,13 @@ const Foreground = () => {
       <Button onClick={screenshot}>Open Modal</Button>
       <Flex
         ref={foregroundRef}
-        {...imageStyles}
+        {...imageDimensions}
         transition="all .2s"
         overflow="hidden"
         justifyContent="center"
         alignItems="center"
         flexDirection="column"
         {...background()}
-        p="10%"
       >
         <Flex flexDir="column" transform={`scale(${imageScale})`}>
           <DeviceWrapper image={image!} />
