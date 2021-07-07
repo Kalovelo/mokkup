@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import BrowserWindow from "components/BrowserWindow";
 import { DeviceContext } from "contexts/Device";
 import { BezelOptions } from "contexts/Device/types";
@@ -12,21 +12,25 @@ const DeviceWrapper = ({ image }: { image: string }) => {
   const shadowContext = React.useContext(ShadowContext)!;
   const shadow = () => generateShadow(shadowContext.shadow);
   const [imageStyles, setimageStyles] = React.useState({});
+  const imageRef = React.useRef<HTMLImageElement>(null);
 
   React.useEffect(() => {
     switch (deviceContext.device.title) {
       case BEZEL:
-        return setimageStyles({ border: `solid ${(deviceContext.device.options as BezelOptions).color} 20px`, borderRadius: "2rem" });
+        return setimageStyles({
+          outline: `solid ${(deviceContext.device.options as BezelOptions).color} 10px`,
+          borderRadius: "2rem",
+        });
       default:
         return setimageStyles({});
     }
   }, [deviceContext.device]);
 
   return (
-    <Box style={{ boxShadow: shadow() }} borderRadius="2rem">
+    <>
       {deviceContext.device.title === BROWSER && <BrowserWindow />}
-      <Image src={image} width="100%" {...imageStyles} />
-    </Box>
+      <Image maxW="100%" maxH="100%" ref={imageRef} boxShadow={shadow()} src={image} {...imageStyles} />
+    </>
   );
 };
 

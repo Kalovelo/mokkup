@@ -18,7 +18,7 @@ type BackgroundContextProviderType = {
   children: React.ReactNode;
 };
 export const BackgroundContextProvider: React.FC<BackgroundContextProviderType> = ({ children }: { children: React.ReactNode }) => {
-  const [background, setBackground] = useState<Background>({ colors: ["#cccccc", "#cccccc"], direction: "to-r" });
+  const [background, setBackground] = useState<Background>({ colors: ["#CCCCCC", "#9A9A9A"], direction: "to-r" });
 
   const setBackgroundColors = (colors: string[]) => {
     const newBackground = { ...background };
