@@ -1,15 +1,16 @@
 import React, { createContext, useState } from "react";
+import { Directions } from "./types";
 
 type Background = {
   colors: string[];
-  direction: string;
+  direction: Directions[number];
 };
 
 type BackgroundContextType = {
   background: Background;
   setBackground: (background: Background) => void;
   setBackgroundColors: (colors: string[]) => void;
-  setDirection: (direction: string) => void;
+  setDirection: (direction: Directions[number]) => void;
 };
 
 export const BackgroundContext = createContext<BackgroundContextType | null>(null);
@@ -26,7 +27,7 @@ export const BackgroundContextProvider: React.FC<BackgroundContextProviderType> 
     setBackground(newBackground!);
   };
 
-  const setDirection = (direction: string) => {
+  const setDirection = (direction: Directions[number]) => {
     const newBackground = { ...background };
     newBackground!.direction = direction;
     setBackground(newBackground!);

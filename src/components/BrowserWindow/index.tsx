@@ -8,7 +8,6 @@ const BrowserWindow: React.FC = () => {
   const context = React.useContext(DeviceContext)!;
 
   const options = context.device.options as BrowserOptions;
-  React.useEffect(() => console.log(options));
 
   return (
     <div className="BrowserWindow">

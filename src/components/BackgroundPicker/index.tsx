@@ -4,8 +4,7 @@ import React, { useContext } from "react";
 import { BiMinus, BiPlus, BiRotateLeft, BiRotateRight } from "react-icons/bi";
 import PrebuiltPicker from "./PreBuiltPicker";
 import { BackgroundContext } from "contexts/Background";
-
-const directions: string[] = ["to-t", "to-tr", "to-r", "to-br", "to-b", "to-bl", "to-l", "to-tl"];
+import { rotate } from "./utils";
 
 const BackgroundPicker: React.FC = () => {
   const context = useContext(BackgroundContext)!;
@@ -19,18 +18,6 @@ const BackgroundPicker: React.FC = () => {
 
   const addColor = () => {
     context?.setBackgroundColors([...colors!, "#cccccc"]);
-  };
-
-  const rotate = (direction: string) => {
-    const currentDirection = context.background.direction;
-    const index = directions.indexOf(currentDirection);
-    if (direction === "right") {
-      if (index === directions.length - 1) return context.setDirection(directions[0]);
-      context.setDirection(directions[index + 1]);
-    } else {
-      if (index === 0) return context.setDirection(directions[directions.length - 1]);
-      context.setDirection(directions[index - 1]);
-    }
   };
 
   return (
@@ -55,7 +42,7 @@ const BackgroundPicker: React.FC = () => {
           isDisabled={colors.length < 2}
           alignSelf="flex-end"
           icon={<BiRotateLeft />}
-          onClick={() => rotate("left")}
+          onClick={() => context.setDirection(rotate(context.background.direction, "left"))}
         />
         <IconButton
           size="sm"
@@ -64,7 +51,7 @@ const BackgroundPicker: React.FC = () => {
           isDisabled={colors.length < 2}
           justifySelf="flex-end"
           icon={<BiRotateRight />}
-          onClick={() => rotate("right")}
+          onClick={() => context.setDirection(rotate(context.background.direction, "right"))}
         />
       </Box>
     </Grid>

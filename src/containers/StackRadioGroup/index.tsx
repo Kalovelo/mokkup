@@ -20,7 +20,7 @@ const StackRadioGroup: React.FC<StackRadioGroupProps> = ({ options, name, callba
   const group = getRootProps();
 
   return (
-    <Grid {...styles} gridTemplateColumns={`repeat(${options.length},minmax(10px, 1fr))`} fontSize="md" wordBreak="break-word" {...group}>
+    <Grid {...styles} gridTemplateColumns={`repeat(${options.length},minmax(80px, 100px))`} fontSize="md" wordBreak="break-word" {...group}>
       {options.map((option) => {
         const radio = getRadioProps({ ...getRadioProps(), value: option.value });
         return (

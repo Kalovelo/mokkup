@@ -2,7 +2,7 @@ import { FormLabel, Grid, Icon, Switch } from "@chakra-ui/react";
 import ColorPicker from "components/ColorPicker";
 import StackRadioGroup from "containers/StackRadioGroup";
 import { DeviceContext } from "contexts/Device";
-import { BEZEL, BEZEL_TITLE_TYPE, BROWSER, BROWSER_TITLE_TYPE, NONE, NONE_TITLE_TYPE } from "contexts/Device/constants";
+import { BEZEL, BROWSER, NONE } from "contexts/Device/constants";
 import { BezelOptions, BrowserOptions } from "contexts/Device/types";
 import React from "react";
 import { ColorResult } from "react-color";
@@ -10,44 +10,34 @@ import { AiOutlineMobile } from "react-icons/ai";
 import { FiCircle } from "react-icons/fi";
 import { GoBrowser } from "react-icons/go";
 import { formatRGBA } from "utils/colors";
-import {
-  BEZEL_COLOR_LABEL,
-  DARK_MODE,
-  DARK_MODE_TYPE,
-  HIDDEN_BAR,
-  HIDDEN_BAR_TYPE,
-  HIDDEN_TOGGLE,
-  HIDDEN_TOGGLE_TYPE,
-  STEALTH_BUTTONS,
-  STEALTH_BUTTONS_TYPE,
-} from "./constants";
+import { BEZEL_COLOR_LABEL, DARK_MODE, HIDDEN_BAR, HIDDEN_TOGGLE, STEALTH_BUTTONS } from "./constants";
 
 type BrowserOptionHandler = {
-  title: DARK_MODE_TYPE | STEALTH_BUTTONS_TYPE | HIDDEN_TOGGLE_TYPE | HIDDEN_BAR_TYPE;
+  title: typeof DARK_MODE | typeof HIDDEN_BAR | typeof HIDDEN_TOGGLE | typeof STEALTH_BUTTONS;
   callback: (status: boolean) => void;
 };
 
 type Option_Type = { value: string; label: JSX.Element };
 
+const options: Option_Type[] = [
+  {
+    value: NONE,
+    label: <Icon as={FiCircle} />,
+  },
+  {
+    value: BROWSER,
+    label: <Icon as={GoBrowser} />,
+  },
+  {
+    value: BEZEL,
+    label: <Icon as={AiOutlineMobile} />,
+  },
+];
+
 const DevicePicker: React.FC = () => {
   const context = React.useContext(DeviceContext)!;
 
-  const options: Option_Type[] = [
-    {
-      value: NONE,
-      label: <Icon as={FiCircle} />,
-    },
-    {
-      value: BROWSER,
-      label: <Icon as={GoBrowser} />,
-    },
-    {
-      value: BEZEL,
-      label: <Icon as={AiOutlineMobile} />,
-    },
-  ];
-
-  const handleChange = (nextValue: BROWSER_TITLE_TYPE | BEZEL_TITLE_TYPE | NONE_TITLE_TYPE) => {
+  const handleChange = (nextValue: string) => {
     switch (nextValue) {
       case BROWSER:
         return context.setDevice({

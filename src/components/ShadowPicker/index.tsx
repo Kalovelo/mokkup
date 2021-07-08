@@ -5,6 +5,17 @@ import React from "react";
 import { ColorResult } from "react-color";
 import { formatRGBA } from "utils/colors";
 import { parseNumberInput } from "utils/validation";
+import {
+  BLUR_LABEL,
+  BLUR_TOOLTIP,
+  SPREAD_LABEL,
+  SPREAD_TOOLTIP,
+  VALUE_INFORMATION,
+  X_AXIS_LABEL,
+  X_AXIS_TOOLTIP,
+  Y_AXIS_LABEL,
+  Y_AXIS_TOOLTIP,
+} from "./constants";
 
 type gridItem = {
   label: string;
@@ -46,27 +57,27 @@ const ShadowPicker: React.FC = () => {
 
   const gridItems: gridItem[] = [
     {
-      label: "X:",
+      label: X_AXIS_LABEL,
       callback: changeX,
-      tooltip: "Horizontial Offset",
+      tooltip: X_AXIS_TOOLTIP,
       value: context.shadow.x,
     },
     {
-      label: "Y:",
+      label: Y_AXIS_LABEL,
       callback: changeY,
-      tooltip: "Vertical Offset",
+      tooltip: Y_AXIS_TOOLTIP,
       value: context.shadow.y,
     },
     {
-      label: "B:",
+      label: BLUR_LABEL,
       callback: changeBlur,
-      tooltip: "Blur Radius",
+      tooltip: BLUR_TOOLTIP,
       value: context.shadow.blur,
     },
     {
-      label: "S:",
+      label: SPREAD_LABEL,
       callback: changeSpread,
-      tooltip: "Spread Radius",
+      tooltip: SPREAD_TOOLTIP,
       value: context.shadow.spread,
     },
   ];
@@ -76,7 +87,7 @@ const ShadowPicker: React.FC = () => {
         <ColorPicker color={context.shadow.color} callback={(color: ColorResult) => changeColor(color)} />
       </GridItem>
       <Text gridColumn="3/-1" display="flex" alignItems="center" justifyContent="center" textAlign="center" fontSize=".9rem">
-        💡 Each value is in px.
+        {VALUE_INFORMATION}
       </Text>
       {gridItems.map(({ label, callback, tooltip, value }, index) => (
         <GridItem gridRow="2" key={index} display="flex" gridGap="1rem" alignItems="center">

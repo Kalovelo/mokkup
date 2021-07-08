@@ -1,4 +1,4 @@
-import { BROWSER_TITLE_TYPE, BEZEL_TITLE_TYPE, NONE_TITLE_TYPE } from "./constants";
+import { BEZEL, NONE, BROWSER } from "./constants";
 
 export type BrowserOptions = {
   isDark: boolean;
@@ -12,6 +12,6 @@ export type BezelOptions = {
 };
 
 export type Device = {
-  title: BROWSER_TITLE_TYPE | BEZEL_TITLE_TYPE | NONE_TITLE_TYPE;
+  title: typeof BROWSER | typeof BEZEL | typeof NONE;
   options?: BrowserOptions | BezelOptions;
 };

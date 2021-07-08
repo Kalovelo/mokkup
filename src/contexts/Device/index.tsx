@@ -10,7 +10,7 @@ type DeviceContextType = {
 export const DeviceContext = createContext<DeviceContextType | null>(null);
 
 export const DeviceContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const defaultState = {
+  const defaultState: Device = {
     title: NONE,
   };
 
