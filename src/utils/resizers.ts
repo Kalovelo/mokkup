@@ -4,6 +4,6 @@ export const resolutionDivider = (width: number, height: number) => {
 };
 
 export const scaleDivider = (width: number, height: number) => {
-  const max = 1.2 * Math.min(window.innerWidth / width, window.innerHeight / height);
+  const max = 1.3 * Math.min(window.innerWidth / width, window.innerHeight / (height * 1.5));
   return max < 1 ? max : 1;
 };

@@ -14,11 +14,13 @@ import { BEZEL_COLOR_LABEL, DARK_MODE, HIDDEN_BAR, HIDDEN_TOGGLE, PLACEHOLDER, S
 
 type BrowserOptionSwitch = {
   title: typeof DARK_MODE | typeof HIDDEN_BAR | typeof HIDDEN_TOGGLE | typeof STEALTH_BUTTONS;
+  defaultValue?: boolean;
   callback: (status: boolean) => void;
 };
 type BrowserOptionHandler = {
   input: {
     title: string;
+    defaultValue?: string;
     callback: (el: React.ChangeEvent<HTMLInputElement>) => void;
   };
   switches: BrowserOptionSwitch[];
@@ -69,6 +71,7 @@ const DevicePicker: React.FC = () => {
   const browserOptions: BrowserOptionHandler = {
     input: {
       title: URL_LABEL,
+      defaultValue: context.device.options && (context.device.options as BrowserOptions).url,
       callback: (e: React.ChangeEvent<HTMLInputElement>) => {
         const newDevice = { ...context.device };
         (newDevice.options as BrowserOptions).url = e.target!.value;
@@ -83,6 +86,7 @@ const DevicePicker: React.FC = () => {
           (newDevice.options as BrowserOptions).isDark = status;
           context.setDevice(newDevice);
         },
+        defaultValue: context.device.options && (context.device.options as BrowserOptions).isDark,
       },
       {
         title: STEALTH_BUTTONS,
@@ -91,6 +95,7 @@ const DevicePicker: React.FC = () => {
           (newDevice.options as BrowserOptions).isStealth = status;
           context.setDevice(newDevice);
         },
+        defaultValue: context.device.options && (context.device.options as BrowserOptions).isStealth,
       },
       {
         title: HIDDEN_TOGGLE,
@@ -99,6 +104,7 @@ const DevicePicker: React.FC = () => {
           (newDevice.options as BrowserOptions).isToggleHidden = status;
           context.setDevice(newDevice);
         },
+        defaultValue: context.device.options && (context.device.options as BrowserOptions).isToggleHidden,
       },
       {
         title: HIDDEN_BAR,
@@ -107,6 +113,7 @@ const DevicePicker: React.FC = () => {
           (newDevice.options as BrowserOptions).isBarHidden = status;
           context.setDevice(newDevice);
         },
+        defaultValue: context.device.options && (context.device.options as BrowserOptions).isBarHidden,
       },
     ],
   };
@@ -120,21 +127,31 @@ const DevicePicker: React.FC = () => {
 
   return (
     <Grid gridGap="30">
-      <StackRadioGroup defaultValue={NONE} name="device type" options={options} callback={handleChange} />
+      <StackRadioGroup defaultValue={BROWSER} name="device type" options={options} callback={handleChange} />
       <Grid gridTemplateColumns="1fr 1fr" justifyContent="space-evenly" gridGap="8" alignItems="center">
         {context.device.title === BROWSER && (
           <>
             {browserOptions.switches.map((browserOption, index) => (
               <Grid key={index} gridTemplateColumns="90px 40px" alignItems="center">
                 <FormLabel htmlFor={browserOption.title}>{browserOption.title}</FormLabel>
-                <Switch onChange={(e) => browserOption.callback(e.target.checked)} id={browserOption.title} />
+                <Switch
+                  defaultIsChecked={browserOption.defaultValue}
+                  onChange={(e) => browserOption.callback(e.target.checked)}
+                  id={browserOption.title}
+                />
               </Grid>
             ))}
             <Flex gridGap="2" alignItems="center" gridColumn="1/-1">
               <FormLabel m="0" textAlign="center" htmlFor={browserOptions.input.title}>
                 {browserOptions.input.title}
               </FormLabel>
-              <Input w="100%" placeholder={PLACEHOLDER} id={browserOptions.input.title} onChange={browserOptions.input.callback} />
+              <Input
+                defaultValue={browserOptions.input.defaultValue}
+                w="100%"
+                placeholder={PLACEHOLDER}
+                id={browserOptions.input.title}
+                onChange={browserOptions.input.callback}
+              />
             </Flex>
           </>
         )}

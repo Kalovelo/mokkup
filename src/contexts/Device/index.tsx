@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { NONE } from "./constants";
+import { BROWSER, NONE } from "./constants";
 import { Device } from "./types";
 
 type DeviceContextType = {
@@ -11,7 +11,14 @@ export const DeviceContext = createContext<DeviceContextType | null>(null);
 
 export const DeviceContextProvider = ({ children }: { children: React.ReactNode }) => {
   const defaultState: Device = {
-    title: NONE,
+    title: BROWSER,
+    options: {
+      isDark: true,
+      isStealth: true,
+      isBarHidden: false,
+      isToggleHidden: false,
+      url: "https://kalovelo.com",
+    },
   };
 
   const [device, setDevice] = useState<Device>(defaultState);

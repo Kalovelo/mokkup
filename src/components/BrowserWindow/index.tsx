@@ -23,6 +23,7 @@ const BrowserWindow: React.FC = () => {
               display: options.isBarHidden ? "none" : "",
               background: options.isDark ? "#3D464F" : "#fff",
               color: options.isDark ? "#fff" : "#000",
+              lineHeight: "1.1rem",
             }}
             className="BrowserWindow__input"
             defaultValue={INPUT_PLACEHOLDER}

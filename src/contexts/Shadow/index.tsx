@@ -16,7 +16,7 @@ type ShadowContextType = {
 export const ShadowContext = createContext<ShadowContextType | null>(null);
 
 export const ShadowContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [shadow, setShadow] = useState<Shadow>({ x: 0, y: 0, blur: 55, spread: 5, color: "#818181" });
+  const [shadow, setShadow] = useState<Shadow>({ x: 0, y: 0, blur: 55, spread: 5, color: "#545252" });
 
   const providerProps = { shadow, setShadow };
 
