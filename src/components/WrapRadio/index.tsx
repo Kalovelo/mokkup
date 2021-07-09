@@ -27,6 +27,7 @@ const WrapRadio: React.FC<WrapRadioProps> = ({ radioProps, children, tooltip }) 
           justifyContent="center"
           alignItems="center"
           h="100%"
+          fontSize={{ base: "sm", md: "md" }}
           cursor="pointer"
           borderWidth="1px"
           borderRadius={typeof children === "string" ? "10px" : "50%"}
@@ -39,7 +40,7 @@ const WrapRadio: React.FC<WrapRadioProps> = ({ radioProps, children, tooltip }) 
           _focus={{
             boxShadow: "outline",
           }}
-          px={2}
+          px={{ base: 1, md: 2 }}
           py={typeof children === "string" ? 2 : 4}
         >
           {children}

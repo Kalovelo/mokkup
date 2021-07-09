@@ -43,7 +43,12 @@ const PrebuiltPicker: React.FC = () => {
           <ModalCloseButton />
           <ModalBody display="grid" gridGap="5">
             <Box display="flex" justifyContent="space-between" gridGap="10px"></Box>
-            <Box display="grid" gridGap="5" justifyContent="center" gridTemplateColumns="repeat(auto-fill, 120px)">
+            <Box
+              display="grid"
+              gridGap="5"
+              justifyContent="center"
+              gridTemplateColumns={{ base: "repeat(auto-fill, 80px)", lg: "repeat(auto-fill, 120px)" }}
+            >
               {gradients.slice(currentPage * colorsPerPage, (currentPage + 1) * colorsPerPage).map((gradient, index) => (
                 <Button
                   key={index}

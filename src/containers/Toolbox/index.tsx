@@ -5,7 +5,7 @@ import DimensionPicker from "components/DimensionPicker";
 import ImagePicker from "components/ImagePicker";
 import ShadowPicker from "components/ShadowPicker";
 import React from "react";
-import { BACKGROUND_TITLE, DEVICE_TITLE, SHADOW_TITLE } from "./constants";
+import { BACKGROUND_TITLE, DEVICE_TITLE, DIMENSIONS_TITLE, SHADOW_TITLE } from "./constants";
 
 type Picker = {
   title: string;
@@ -22,7 +22,7 @@ const Toolbox = () => {
       component: <ShadowPicker />,
     },
     {
-      title: "Dimensions",
+      title: DIMENSIONS_TITLE,
       component: <DimensionPicker />,
     },
     {

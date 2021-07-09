@@ -82,20 +82,20 @@ const ShadowPicker: React.FC = () => {
     },
   ];
   return (
-    <Grid gridGap="0.5rem" templateColumns=" repeat(4,6rem)">
-      <GridItem marginY="2" gridColumn="1/3">
+    <Grid gridGap="0.5rem" templateColumns={{ base: "repeat(2,1fr)", lg: "repeat(4,6rem)" }}>
+      <GridItem marginY="2" gridColumn={{ base: "1", lg: "1/3" }}>
         <ColorPicker color={context.shadow.color} callback={(color: ColorResult) => changeColor(color)} />
       </GridItem>
-      <Text gridColumn="3/-1" display="flex" alignItems="center" justifyContent="center" textAlign="center" fontSize=".9rem">
+      <Text gridColumn={{ base: "2", lg: "3/-1" }} display="flex" alignItems="center" justifyContent="center" textAlign="center" fontSize=".9rem">
         {VALUE_INFORMATION}
       </Text>
       {gridItems.map(({ label, callback, tooltip, value }, index) => (
-        <GridItem gridRow="2" key={index} display="flex" gridGap="1rem" alignItems="center">
+        <GridItem key={index} display="flex" gridGap="1rem" alignItems="center">
           <InputGroup>
             <Tooltip label={tooltip}>
               <InputLeftAddon fontSize=".9rem" justifyContent="center" children={label} />
             </Tooltip>
-            <NumberInput inputMode="numeric" placeholder="0" defaultValue={value} onChange={(val) => callback(parseNumberInput(val))}>
+            <NumberInput w="100%" inputMode="numeric" placeholder="0" defaultValue={value} onChange={(val) => callback(parseNumberInput(val))}>
               <NumberInputField textAlign="center" p="2" />
             </NumberInput>
           </InputGroup>

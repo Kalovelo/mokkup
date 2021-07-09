@@ -142,7 +142,7 @@ const DimensionPicker: React.FC = () => {
     <Grid gridGap="10">
       <GridItem>
         <StackRadioGroup
-          styles={{ gridGap: "0.5rem" }}
+          styles={{ gridGap: "0.2rem" }}
           defaultValue={TWITTER_POST_TITLE}
           name="device type"
           options={options}
@@ -155,10 +155,11 @@ const DimensionPicker: React.FC = () => {
             <GridItem gridRow="2" key={index} display="flex" gridGap="1rem" alignItems="center">
               <InputGroup>
                 <Tooltip label={tooltip}>
-                  <InputLeftAddon fontSize=".9rem" justifyContent="center" children={label} />
+                  <InputLeftAddon fontSize=".7rem" p="1" justifyContent="center" children={label} />
                 </Tooltip>
                 <NumberInput
                   min={min}
+                  w="100%"
                   max={max}
                   textAlign="center"
                   inputMode="numeric"
@@ -169,7 +170,7 @@ const DimensionPicker: React.FC = () => {
                 >
                   <NumberInputField textAlign="center" p="2" />
                 </NumberInput>
-                <InputRightAddon children={rightLabel} />
+                <InputRightAddon fontSize=".7rem" children={rightLabel} />
               </InputGroup>
             </GridItem>
           ))}

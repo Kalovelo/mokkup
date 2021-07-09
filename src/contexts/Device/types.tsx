@@ -5,6 +5,7 @@ export type BrowserOptions = {
   isStealth: boolean;
   isBarHidden: boolean;
   isToggleHidden: boolean;
+  url?: string;
 };
 
 export type BezelOptions = {

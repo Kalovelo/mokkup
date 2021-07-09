@@ -17,7 +17,7 @@ const BackgroundPicker: React.FC = () => {
   };
 
   const addColor = () => {
-    context?.setBackgroundColors([...colors!, "#cccccc"]);
+    context?.setBackgroundColors([...colors!, "#CCCCCC"]);
   };
 
   return (

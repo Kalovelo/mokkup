@@ -18,16 +18,17 @@ const BrowserWindow: React.FC = () => {
           <span className="dot" style={{ background: options.isStealth ? "#969696" : "#5AC05A" }}></span>
         </div>
         <div className="BrowserWindow__column BrowserWindow__middle">
-          <input
+          <span
             style={{
               display: options.isBarHidden ? "none" : "",
               background: options.isDark ? "#3D464F" : "#fff",
               color: options.isDark ? "#fff" : "#000",
             }}
             className="BrowserWindow__input"
-            type="text"
             defaultValue={INPUT_PLACEHOLDER}
-          />
+          >
+            {options.url}
+          </span>
         </div>
         <div style={{ display: options.isToggleHidden ? "none" : "" }} className="BrowserWindow__column BrowserWindow__right">
           <span style={{ background: options.isDark ? "#807e7e" : "#aaa" }} className="bar"></span>

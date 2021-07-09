@@ -38,7 +38,7 @@ export const App = () => (
             <ChakraProvider theme={theme}>
               <Box fontSize="xl">
                 <Header />
-                <Grid p="3" gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", md: "450px 800px" }}>
+                <Grid p="3" gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", lg: "1fr 1fr", xl: "450px 800px" }}>
                   <GridItem>
                     <Toolbox />
                   </GridItem>

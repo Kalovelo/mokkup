@@ -1,5 +1,5 @@
 export const resolutionDivider = (width: number, height: number) => {
-  const max = Math.max(width / (window.innerWidth / 2), height / window.innerHeight);
+  const max = Math.max(width / (window.innerWidth / 2), height / (window.innerHeight / 1.5));
   return max > 1 ? max : 1;
 };
 

@@ -11,7 +11,7 @@ export const ORIGINAL_SIZE_TITLE = "Original Size";
 
 export const SCALE_LABEL = "Scale:";
 export const SCALE_TOOLTIP = "Value between [0,100]";
-export const SCALE_RIGHT_LABEL = "px";
+export const SCALE_RIGHT_LABEL = "%";
 
 export const WIDTH_LABEL = "Width:";
 export const WIDTH_TOOLTIP = "Width Value is in px.";
