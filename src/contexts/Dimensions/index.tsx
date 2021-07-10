@@ -1,21 +1,15 @@
-import React, { createContext, useState } from "react";
-
-type Dimensions = {
-  scale: number;
-  resolution?: {
-    x: number;
-    y: number;
-  };
-};
+import React, { createContext } from "react";
+import { dimensionsReducer } from "./reducer";
+import { Action, Dimensions } from "./types";
 
 type DimensionsContextType = {
   dimensions: Dimensions;
-  setDimensions: (dimensions: Dimensions) => void;
+  dispatch: React.Dispatch<Action>;
 };
 
-export const DimensionsContext = createContext<DimensionsContextType | null>(null);
+const DimensionsContext = createContext<DimensionsContextType | null>(null);
 
-export const DimensionsContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const DimensionsProvider = ({ children }: { children: React.ReactNode }) => {
   const defaultDimensions: Dimensions = {
     scale: 1,
     resolution: {
@@ -23,9 +17,18 @@ export const DimensionsContextProvider = ({ children }: { children: React.ReactN
       y: 650,
     },
   };
-  const [dimensions, setDimensions] = useState<Dimensions>(defaultDimensions);
+  const [dimensions, dispatch] = React.useReducer(dimensionsReducer, defaultDimensions);
 
-  const providerProps = { dimensions, setDimensions };
+  const providerProps = { dimensions, dispatch };
 
-  return <DimensionsContext.Provider value={{ ...providerProps }}>{children}</DimensionsContext.Provider>;
+  return <DimensionsContext.Provider value={providerProps}>{children}</DimensionsContext.Provider>;
 };
+
+export function useDimensions() {
+  const context = React.useContext(DimensionsContext);
+  if (context === undefined) {
+    throw new Error("useDimensions must be used within DimensionsProvider");
+  }
+
+  return context;
+}

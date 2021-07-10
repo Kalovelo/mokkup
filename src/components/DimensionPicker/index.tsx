@@ -1,7 +1,20 @@
-import { Grid, GridItem, InputGroup, InputLeftAddon, InputRightAddon, NumberInput, NumberInputField, Tooltip } from "@chakra-ui/react";
+import {
+  Grid,
+  GridItem,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  Tooltip,
+} from "@chakra-ui/react";
 import StackRadioGroup from "containers/StackRadioGroup";
-import { DimensionsContext } from "contexts/Dimensions";
-import { ImageContext } from "contexts/Image";
+import { useDimensions } from "contexts/Dimensions";
+import { CHANGE_HEIGHT, CHANGE_RESOLUTION, CHANGE_SCALE, CHANGE_WIDTH } from "contexts/Dimensions/constants";
+import { useImage } from "contexts/Image";
 import React from "react";
 import { scaleDivider } from "utils/resizers";
 import { parseNumberInput } from "utils/validation";
@@ -26,37 +39,21 @@ import {
 import { getUploadedImageDimensions } from "./utils";
 
 const DimensionPicker: React.FC = () => {
-  const context = React.useContext(DimensionsContext)!;
-  const imageContext = React.useContext(ImageContext)!;
+  const context = useDimensions()!;
+  const imageContext = useImage()!;
 
   React.useEffect(() => {
     const setScale = async () => {
-      const newDimensions = { ...context.dimensions };
       const { x, y } = (await getUploadedImageDimensions(imageContext.image!)) as { x: number; y: number };
-      newDimensions.scale = scaleDivider(x, y);
-      context.setDimensions(newDimensions);
+      context.dispatch({ type: CHANGE_SCALE, payload: scaleDivider(x, y) });
     };
     setScale();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageContext.image, getUploadedImageDimensions]);
 
-  const changeScale = (scale: number) => {
-    const newDimensions = { ...context.dimensions };
-    newDimensions.scale = scale / 100;
-    context.setDimensions(newDimensions);
-  };
-
-  const changeWidth = (width: number) => {
-    const newDimensions = { ...context.dimensions };
-    newDimensions.resolution!.x = width;
-    context.setDimensions(newDimensions);
-  };
-
-  const changeHeight = (height: number) => {
-    const newDimensions = { ...context.dimensions };
-    newDimensions.resolution!.y = height;
-    context.setDimensions(newDimensions);
-  };
+  const changeScale = (scale: number) => context.dispatch({ type: CHANGE_SCALE, payload: scale / 100 });
+  const changeWidth = (width: number) => context.dispatch({ type: CHANGE_WIDTH, payload: width });
+  const changeHeight = (height: number) => context.dispatch({ type: CHANGE_HEIGHT, payload: height });
 
   type Option_Type = { value: string; label: JSX.Element | string };
 
@@ -121,20 +118,18 @@ const DimensionPicker: React.FC = () => {
   const handleChange = async (
     nextValue: typeof ORIGINAL_SIZE_TITLE | typeof TWITTER_POST_TITLE | typeof INSTAGRAM_POST_TITLE | typeof INSTAGRAM_STORY_TITLE
   ) => {
-    const newDimensions = { ...context.dimensions };
     switch (nextValue) {
       case TWITTER_POST_TITLE:
-        newDimensions.resolution = TWITTER_POST_SIZE;
-        return context.setDimensions(newDimensions);
+        return context.dispatch({ type: CHANGE_RESOLUTION, payload: TWITTER_POST_SIZE });
       case INSTAGRAM_POST_TITLE:
-        newDimensions.resolution = INSTAGRAM_POST_SIZE;
-        return context.setDimensions(newDimensions);
+        return context.dispatch({ type: CHANGE_RESOLUTION, payload: INSTAGRAM_POST_SIZE });
       case INSTAGRAM_STORY_TITLE:
-        newDimensions.resolution = INSTAGRAM_STORY_SIZE;
-        return context.setDimensions(newDimensions);
+        return context.dispatch({ type: CHANGE_RESOLUTION, payload: INSTAGRAM_STORY_SIZE });
       case ORIGINAL_SIZE_TITLE:
-        newDimensions.resolution = (await getUploadedImageDimensions(imageContext.image!)) as { x: number; y: number };
-        return context.setDimensions(newDimensions);
+        return context.dispatch({
+          type: CHANGE_RESOLUTION,
+          payload: (await getUploadedImageDimensions(imageContext.image!)) as { x: number; y: number },
+        });
     }
   };
 
@@ -195,6 +190,10 @@ const DimensionPicker: React.FC = () => {
               onChange={(val) => callback(parseNumberInput(val, min, max))}
             >
               <NumberInputField textAlign="center" p="2" />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
             </NumberInput>
             <InputRightAddon children={rightLabel} />
           </InputGroup>
