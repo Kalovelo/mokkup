@@ -23,7 +23,7 @@ const Foreground = () => {
   useMediaQuery("(max-width: 600px)");
   const imageDimensions = {
     w: `${width / resolutionDivider(width, height)}px`,
-    h: `${height / resolutionDivider(height, height)}px`,
+    h: `${height / resolutionDivider(width, height)}px`,
   };
 
   const { colors, direction } = backgroundContext.background;
@@ -37,18 +37,15 @@ const Foreground = () => {
   };
 
   const screenshot = () => {
-    toPng(foregroundRef.current!, { pixelRatio: resolutionDivider(height, height) }).then((canvas) => {
+    toPng(foregroundRef.current!, { pixelRatio: 1, canvasWidth: width, canvasHeight: height }).then((canvas) => {
       return saveAs(canvas, "mokkup.jpg");
     });
   };
 
-  React.useEffect(() => {});
-
   return (
-    <>
+    <Flex flexDirection="column" alignItems="center" justifyContent="center">
       <Button onClick={screenshot}>Open Modal</Button>
       <Flex
-        m="0 auto"
         shadow="lg"
         ref={foregroundRef}
         {...imageDimensions}
@@ -63,7 +60,7 @@ const Foreground = () => {
           <DeviceWrapper image={image!} />
         </Flex>
       </Flex>
-    </>
+    </Flex>
   );
 };
 

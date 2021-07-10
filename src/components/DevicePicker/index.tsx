@@ -131,7 +131,7 @@ const DevicePicker: React.FC = () => {
         {context.device.title === BROWSER && (
           <>
             {browserOptions.switches.map((browserOption, index) => (
-              <Grid key={index} gridTemplateColumns="90px 40px" alignItems="center">
+              <Grid key={index} gridTemplateColumns="90px 40px" justifyContent="center" alignItems="center">
                 <FormLabel htmlFor={browserOption.title}>{browserOption.title}</FormLabel>
                 <Switch
                   defaultIsChecked={browserOption.defaultValue}

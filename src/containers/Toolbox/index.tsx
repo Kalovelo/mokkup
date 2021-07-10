@@ -47,6 +47,7 @@ const Toolbox = () => {
           </AccordionItem>
         ))}
       </Accordion>
+      <ImagePicker />
     </Grid>
   );
 };
