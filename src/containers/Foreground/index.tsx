@@ -48,6 +48,8 @@ const Foreground = () => {
     <>
       <Button onClick={screenshot}>Open Modal</Button>
       <Flex
+        m="0 auto"
+        shadow="lg"
         ref={foregroundRef}
         {...imageDimensions}
         transition="all .2s"
