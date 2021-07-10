@@ -1,16 +1,28 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import defaultImage from "static/defaultImage.png";
+import { imageReducer } from "./reducer";
+import { Action } from "./types";
+
 type ImageContextType = {
   image: string | null;
-  setImage: (url: string) => void;
+  dispatch: React.Dispatch<Action>;
 };
 
-export const ImageContext = createContext<ImageContextType | null>(null);
+const ImageContext = createContext<ImageContextType | null>(null);
 
-export const ImageContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [image, setImage] = useState<string | null>(defaultImage);
+export const ImageProvider = ({ children }: { children: React.ReactNode }) => {
+  const [image, dispatch] = React.useReducer(imageReducer, defaultImage);
 
-  const providerProps = { image, setImage };
+  const providerProps = { image, dispatch };
 
-  return <ImageContext.Provider value={{ ...providerProps }}>{children}</ImageContext.Provider>;
+  return <ImageContext.Provider value={providerProps}>{children}</ImageContext.Provider>;
 };
+
+export function useImage() {
+  const context = React.useContext(ImageContext);
+  if (context === undefined) {
+    throw new Error("useImage must be used within ImageProvider");
+  }
+
+  return context;
+}
