@@ -1,39 +1,30 @@
-import React, { createContext, useState } from "react";
-import { Directions } from "./types";
-
-type Background = {
-  colors: string[];
-  direction: Directions[number];
-};
+import React, { createContext } from "react";
+import { backgroundReducer } from "./reducer";
+import { Background, Action } from "./types";
 
 type BackgroundContextType = {
   background: Background;
-  setBackground: (background: Background) => void;
-  setBackgroundColors: (colors: string[]) => void;
-  setDirection: (direction: Directions[number]) => void;
+  dispatch: React.Dispatch<Action>;
 };
 
-export const BackgroundContext = createContext<BackgroundContextType | null>(null);
+const BackgroundContext = createContext<BackgroundContextType | null>(null);
 
-type BackgroundContextProviderType = {
+type BackgroundProviderType = {
   children: React.ReactNode;
 };
-export const BackgroundContextProvider: React.FC<BackgroundContextProviderType> = ({ children }: { children: React.ReactNode }) => {
-  const [background, setBackground] = useState<Background>({ colors: ["#536976", "#292E49"], direction: "to-r" });
+export const BackgroundProvider: React.FC<BackgroundProviderType> = ({ children }: { children: React.ReactNode }) => {
+  const [background, dispatch] = React.useReducer(backgroundReducer, { colors: ["#536976", "#292E49"], direction: "to-r" });
 
-  const setBackgroundColors = (colors: string[]) => {
-    const newBackground = { ...background };
-    newBackground!.colors = colors;
-    setBackground(newBackground!);
-  };
+  const providerProps = { background, dispatch };
 
-  const setDirection = (direction: Directions[number]) => {
-    const newBackground = { ...background };
-    newBackground!.direction = direction;
-    setBackground(newBackground!);
-  };
-
-  const providerProps = { background, setBackground, setBackgroundColors, setDirection };
-
-  return <BackgroundContext.Provider value={{ ...providerProps }}>{children}</BackgroundContext.Provider>;
+  return <BackgroundContext.Provider value={providerProps}>{children}</BackgroundContext.Provider>;
 };
+
+export function useBackground() {
+  const context = React.useContext(BackgroundContext);
+  if (context === undefined) {
+    throw new Error("useBackground must be used within a BackgroundProvider");
+  }
+
+  return context;
+}

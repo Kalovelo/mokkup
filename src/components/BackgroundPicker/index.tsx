@@ -1,23 +1,24 @@
 import { Box, Grid, Heading, IconButton } from "@chakra-ui/react";
 import ColorPickWrapper from "containers/ColorPickWrapper";
-import React, { useContext } from "react";
+import { useBackground } from "contexts/Background";
+import { CHANGE_COLORS, CHANGE_DIRECTION } from "contexts/Background/constants";
+import React from "react";
 import { BiMinus, BiPlus, BiRotateLeft, BiRotateRight } from "react-icons/bi";
 import PrebuiltPicker from "./PreBuiltPicker";
-import { BackgroundContext } from "contexts/Background";
 import { rotate } from "./utils";
 
 const BackgroundPicker: React.FC = () => {
-  const context = useContext(BackgroundContext)!;
+  const context = useBackground()!;
   const colors: string[] = context.background.colors;
 
   const removeColor = () => {
     let newColors: string[] = [...colors];
     newColors.pop();
-    context?.setBackgroundColors(newColors);
+    context.dispatch({ type: CHANGE_COLORS, payload: newColors });
   };
 
   const addColor = () => {
-    context?.setBackgroundColors([...colors!, "#CCCCCC"]);
+    context.dispatch({ type: CHANGE_COLORS, payload: [...colors!, "#CCCCCC"] });
   };
 
   return (
@@ -42,7 +43,7 @@ const BackgroundPicker: React.FC = () => {
           isDisabled={colors.length < 2}
           alignSelf="flex-end"
           icon={<BiRotateLeft />}
-          onClick={() => context.setDirection(rotate(context.background.direction, "left"))}
+          onClick={() => context.dispatch({ type: CHANGE_DIRECTION, payload: rotate(context.background.direction, "left") })}
         />
         <IconButton
           size="sm"
@@ -51,7 +52,7 @@ const BackgroundPicker: React.FC = () => {
           isDisabled={colors.length < 2}
           justifySelf="flex-end"
           icon={<BiRotateRight />}
-          onClick={() => context.setDirection(rotate(context.background.direction, "right"))}
+          onClick={() => context.dispatch({ type: CHANGE_DIRECTION, payload: rotate(context.background.direction, "right") })}
         />
       </Box>
     </Grid>
