@@ -1,24 +1,27 @@
-import React, { createContext, useState } from "react";
-
-type Shadow = {
-  x: number;
-  y: number;
-  blur: number;
-  spread: number;
-  color: string;
-};
+import React, { createContext } from "react";
+import { shadowReducer } from "./reducer";
+import { Action, Shadow } from "./types";
 
 type ShadowContextType = {
   shadow: Shadow;
-  setShadow: (shadow: Shadow) => void;
+  dispatch: React.Dispatch<Action>;
 };
 
-export const ShadowContext = createContext<ShadowContextType | null>(null);
+const ShadowContext = createContext<ShadowContextType | null>(null);
 
-export const ShadowContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [shadow, setShadow] = useState<Shadow>({ x: 0, y: 0, blur: 55, spread: 5, color: "#545252" });
+export const ShadowProvider = ({ children }: { children: React.ReactNode }) => {
+  const [shadow, dispatch] = React.useReducer(shadowReducer, { x: 0, y: 0, blur: 55, spread: 5, color: "#545252" });
 
-  const providerProps = { shadow, setShadow };
+  const providerProps = { shadow, dispatch };
 
-  return <ShadowContext.Provider value={{ ...providerProps }}>{children}</ShadowContext.Provider>;
+  return <ShadowContext.Provider value={providerProps}>{children}</ShadowContext.Provider>;
 };
+
+export function useShadow() {
+  const context = React.useContext(ShadowContext);
+  if (context === undefined) {
+    throw new Error("useShadow must be used within ShadowProvider");
+  }
+
+  return context;
+}

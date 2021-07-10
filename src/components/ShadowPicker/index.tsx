@@ -1,6 +1,7 @@
 import { Grid, GridItem, InputGroup, InputLeftAddon, NumberInput, NumberInputField, Text, Tooltip } from "@chakra-ui/react";
 import ColorPicker from "components/ColorPicker";
-import { ShadowContext } from "contexts/Shadow";
+import { useShadow } from "contexts/Shadow";
+import { CHANGE_BLUR, CHANGE_COLOR, CHANGE_SPREAD, CHANGE_X, CHANGE_Y } from "contexts/Shadow/constants";
 import React from "react";
 import { ColorResult } from "react-color";
 import { formatRGBA } from "utils/colors";
@@ -25,35 +26,13 @@ type gridItem = {
 };
 
 const ShadowPicker: React.FC = () => {
-  const context = React.useContext(ShadowContext)!;
+  const context = useShadow()!;
 
-  const changeColor = (color: ColorResult): void => {
-    const formattedColor = formatRGBA(color);
-    const newShadow = { ...context.shadow };
-    newShadow.color = formattedColor;
-    context.setShadow(newShadow);
-  };
-
-  const changeX = (x: number) => {
-    const newShadow = { ...context.shadow };
-    newShadow.x = x;
-    context.setShadow(newShadow);
-  };
-  const changeY = (y: number) => {
-    const newShadow = { ...context.shadow };
-    newShadow.y = y;
-    context.setShadow(newShadow);
-  };
-  const changeBlur = (blur: number) => {
-    const newShadow = { ...context.shadow };
-    newShadow.blur = blur;
-    context.setShadow(newShadow);
-  };
-  const changeSpread = (spread: number) => {
-    const newShadow = { ...context.shadow };
-    newShadow.spread = spread;
-    context.setShadow(newShadow);
-  };
+  const changeColor = (color: ColorResult): void => context.dispatch({ type: CHANGE_COLOR, payload: formatRGBA(color) });
+  const changeX = (x: number): void => context.dispatch({ type: CHANGE_X, payload: x });
+  const changeY = (y: number): void => context.dispatch({ type: CHANGE_Y, payload: y });
+  const changeBlur = (blur: number): void => context.dispatch({ type: CHANGE_BLUR, payload: blur });
+  const changeSpread = (spread: number): void => context.dispatch({ type: CHANGE_SPREAD, payload: spread });
 
   const gridItems: gridItem[] = [
     {
