@@ -1,14 +1,14 @@
 import { Box, ChakraProvider, ColorMode, extendTheme, Grid, GridItem } from "@chakra-ui/react";
 import "@fontsource/manrope/400.css"; // Defaults to weight 400.
 import "@fontsource/manrope/700.css"; // Defaults to weight 400.
-import { BackgroundContextProvider } from "contexts/Background";
-import { DeviceContextProvider } from "contexts/Device";
-import { DimensionsContextProvider } from "contexts/Dimensions";
-import { ImageContextProvider } from "contexts/Image";
-import { ShadowContextProvider } from "contexts/Shadow";
+import { BackgroundProvider } from "contexts/Background";
+import { DeviceProvider } from "contexts/Device";
+import { DimensionsProvider } from "contexts/Dimensions";
+import { ImageProvider } from "contexts/Image";
+import { ShadowProvider } from "contexts/Shadow";
 import * as React from "react";
-import Foreground from "./containers/Foreground";
 import Header from "./components/Header";
+import Foreground from "./containers/Foreground";
 import Toolbox from "./containers/Toolbox";
 
 export interface ChakraConfig {
@@ -30,11 +30,11 @@ const theme = extendTheme({
 });
 
 export const App = () => (
-  <BackgroundContextProvider>
-    <DeviceContextProvider>
-      <ShadowContextProvider>
-        <ImageContextProvider>
-          <DimensionsContextProvider>
+  <BackgroundProvider>
+    <DeviceProvider>
+      <ShadowProvider>
+        <ImageProvider>
+          <DimensionsProvider>
             <ChakraProvider theme={theme}>
               <Box fontSize="xl">
                 <Header />
@@ -48,9 +48,9 @@ export const App = () => (
                 </Grid>
               </Box>
             </ChakraProvider>
-          </DimensionsContextProvider>
-        </ImageContextProvider>
-      </ShadowContextProvider>
-    </DeviceContextProvider>
-  </BackgroundContextProvider>
+          </DimensionsProvider>
+        </ImageProvider>
+      </ShadowProvider>
+    </DeviceProvider>
+  </BackgroundProvider>
 );

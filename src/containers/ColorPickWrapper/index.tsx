@@ -1,7 +1,8 @@
 import { Grid } from "@chakra-ui/react";
 import ColorPicker from "components/ColorPicker";
-import { BackgroundContext } from "contexts/Background";
-import React, { useContext } from "react";
+import { useBackground } from "contexts/Background";
+import { CHANGE_COLORS } from "contexts/Background/constants";
+import React from "react";
 import { ColorResult } from "react-color";
 import { formatRGBA } from "utils/colors";
 
@@ -10,13 +11,13 @@ type ColorPickWrapperProps = {
 };
 
 const ColorPickWrapper: React.FC<ColorPickWrapperProps> = ({ total }) => {
-  const context = useContext(BackgroundContext)!;
+  const context = useBackground()!;
 
   const handleChange = (color: ColorResult, index: number): void => {
     let formattedColor = formatRGBA(color);
     let newColors = [...context.background.colors];
     newColors[index] = formattedColor;
-    context?.setBackgroundColors(newColors);
+    context.dispatch({ type: CHANGE_COLORS, payload: newColors });
   };
 
   return (

@@ -1,11 +1,11 @@
-import { DeviceContext } from "contexts/Device";
+import { useDevice } from "contexts/Device";
 import { BrowserOptions } from "contexts/Device/types";
 import React from "react";
 import "./BrowserWindow.css";
 import { INPUT_PLACEHOLDER } from "./constants";
 
 const BrowserWindow: React.FC = () => {
-  const context = React.useContext(DeviceContext)!;
+  const context = useDevice()!;
 
   const options = context.device.options as BrowserOptions;
 
@@ -31,7 +31,7 @@ const BrowserWindow: React.FC = () => {
             {options.url}
           </span>
         </div>
-        <div style={{ display: options.isToggleHidden ? "none" : "" }} className="BrowserWindow__column BrowserWindow__right">
+        <div style={{ display: options.isBurgerHidden ? "none" : "" }} className="BrowserWindow__column BrowserWindow__right">
           <span style={{ background: options.isDark ? "#807e7e" : "#aaa" }} className="bar"></span>
           <span style={{ background: options.isDark ? "#807e7e" : "#aaa  " }} className="bar"></span>
           <span style={{ background: options.isDark ? "#807e7e" : "#aaa" }} className="bar"></span>

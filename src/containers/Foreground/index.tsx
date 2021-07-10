@@ -1,10 +1,10 @@
 import { Button, Flex } from "@chakra-ui/react";
 import DeviceWrapper from "containers/DeviceWrapper";
-import { BackgroundContext } from "contexts/Background";
-import { DimensionsContext } from "contexts/Dimensions";
-import { ImageContext } from "contexts/Image";
+import { useBackground } from "contexts/Background";
+import { useDimensions } from "contexts/Dimensions";
+import { useImage } from "contexts/Image";
 import { toPng } from "html-to-image";
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { generateGradient } from "utils/colors";
 import { saveAs } from "utils/saveAs";
 import { resolutionDivider } from "../../utils/resizers";
@@ -12,9 +12,9 @@ import { resolutionDivider } from "../../utils/resizers";
 const Foreground = () => {
   const foregroundRef = useRef<HTMLDivElement>(null);
 
-  const backgroundContext = useContext(BackgroundContext)!;
-  const imageContext = useContext(ImageContext)!;
-  const dimensionsContext = useContext(DimensionsContext)!;
+  const backgroundContext = useBackground()!;
+  const imageContext = useImage()!;
+  const dimensionsContext = useDimensions()!;
 
   const width = dimensionsContext.dimensions.resolution?.x!;
   const height = dimensionsContext.dimensions.resolution?.y!;

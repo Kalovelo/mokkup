@@ -1,15 +1,15 @@
 import { Image } from "@chakra-ui/react";
 import BrowserWindow from "components/BrowserWindow";
-import { DeviceContext } from "contexts/Device";
+import { useDevice } from "contexts/Device";
 import { BezelOptions } from "contexts/Device/types";
-import { ShadowContext } from "contexts/Shadow";
+import { useShadow } from "contexts/Shadow";
 import React from "react";
 import { generateShadow } from "utils/colors";
 import { BEZEL, BROWSER } from "../../contexts/Device/constants";
 
 const DeviceWrapper = ({ image }: { image: string }) => {
-  const deviceContext = React.useContext(DeviceContext)!;
-  const shadowContext = React.useContext(ShadowContext)!;
+  const deviceContext = useDevice()!;
+  const shadowContext = useShadow()!;
   const shadow = () => generateShadow(shadowContext.shadow);
   const [imageStyles, setimageStyles] = React.useState({});
   const imageRef = React.useRef<HTMLImageElement>(null);
