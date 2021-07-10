@@ -28,7 +28,7 @@ const ImagePicker: React.FC = () => {
 
   return (
     <>
-      <Button onClick={triggerUploadFile} variant="outline" colorScheme={hasImage ? "gray" : "purple"}>
+      <Button w="100%" onClick={triggerUploadFile} variant="outline" colorScheme={hasImage ? "gray" : "purple"}>
         <label ref={inputRef} htmlFor="upload">
           {CTA_TEXT}
         </label>

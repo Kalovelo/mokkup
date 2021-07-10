@@ -33,7 +33,6 @@ const Toolbox = () => {
 
   return (
     <Grid gridGap="5">
-      <ImagePicker />
       <Accordion defaultIndex={[0]} allowMultiple>
         {pickers.map((picker, index) => (
           <AccordionItem key={index}>
@@ -47,7 +46,6 @@ const Toolbox = () => {
           </AccordionItem>
         ))}
       </Accordion>
-      <ImagePicker />
     </Grid>
   );
 };

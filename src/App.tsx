@@ -1,6 +1,8 @@
 import { Box, ChakraProvider, ColorMode, extendTheme, Grid, GridItem } from "@chakra-ui/react";
 import "@fontsource/manrope/400.css"; // Defaults to weight 400.
 import "@fontsource/manrope/700.css"; // Defaults to weight 400.
+import ImagePicker from "components/ImagePicker";
+import ScreenshotCTA from "components/ScreenshotCTA";
 import { BackgroundProvider } from "contexts/Background";
 import { DeviceProvider } from "contexts/Device";
 import { DimensionsProvider } from "contexts/Dimensions";
@@ -29,28 +31,34 @@ const theme = extendTheme({
   },
 });
 
-export const App = () => (
-  <BackgroundProvider>
-    <DeviceProvider>
-      <ShadowProvider>
-        <ImageProvider>
-          <DimensionsProvider>
-            <ChakraProvider theme={theme}>
-              <Box fontSize="xl">
-                <Header />
-                <Grid p="3" gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", lg: "1fr 1fr", xl: "450px 800px" }}>
-                  <GridItem>
-                    <Toolbox />
-                  </GridItem>
-                  <GridItem>
-                    <Foreground />
-                  </GridItem>
-                </Grid>
-              </Box>
-            </ChakraProvider>
-          </DimensionsProvider>
-        </ImageProvider>
-      </ShadowProvider>
-    </DeviceProvider>
-  </BackgroundProvider>
-);
+export const App = () => {
+  const screenshotRef = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <BackgroundProvider>
+      <DeviceProvider>
+        <ShadowProvider>
+          <ImageProvider>
+            <DimensionsProvider>
+              <ChakraProvider theme={theme}>
+                <Box paddingX={{ md: "10" }} fontSize="xl">
+                  <Header />
+                  <Grid p="3" gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", lg: "1fr 1fr", xl: "450px 1fr" }}>
+                    <GridItem display="grid" gridGap="2">
+                      <ImagePicker />
+                      <Toolbox />
+                      <ScreenshotCTA screenshotRef={screenshotRef} />
+                    </GridItem>
+                    <GridItem>
+                      <Foreground screenshotRef={screenshotRef} />
+                    </GridItem>
+                  </Grid>
+                </Box>
+              </ChakraProvider>
+            </DimensionsProvider>
+          </ImageProvider>
+        </ShadowProvider>
+      </DeviceProvider>
+    </BackgroundProvider>
+  );
+};

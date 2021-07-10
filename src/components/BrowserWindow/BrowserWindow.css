@@ -6,11 +6,6 @@
   padding: 3px 5px;
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
-  grid-template-rows: 10px;
-}
-
-.BrowserWindow__column {
-  float: left;
 }
 
 .BrowserWindow__left {
@@ -42,8 +37,8 @@
 
 /* Three dots */
 .dot {
-  height: 33%;
-  width: 10%;
+  height: 3px;
+  width: 3px;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
@@ -56,15 +51,15 @@
   background-color: white;
   padding: 0 5px;
   height: 100%;
-  line-height: 40%;
-  font-size: 30%;
+  line-height: 100%;
+  font-size: 20%;
   display: flex;
   align-items: center;
 }
 
 .bar {
-  width: 20%;
-  height: 10%;
+  width: 5px;
+  height: 1px;
   background-color: #aaa;
   display: block;
 }
@@ -77,11 +72,17 @@
     grid-template-rows: 20px;
   }
 
-  .bar {
-    width: 30%;
+  .dot {
+    height: 6px;
+    width: 6px;
   }
 
   .BrowserWindow__input {
     font-size: 50%;
+  }
+
+  .bar {
+    width: 30%;
+    height: 10%;
   }
 }

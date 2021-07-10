@@ -1,17 +1,13 @@
-import { Button, Flex, useMediaQuery } from "@chakra-ui/react";
+import { Flex, useMediaQuery } from "@chakra-ui/react";
 import DeviceWrapper from "containers/DeviceWrapper";
 import { useBackground } from "contexts/Background";
 import { useDimensions } from "contexts/Dimensions";
 import { useImage } from "contexts/Image";
-import { toPng } from "html-to-image";
-import React, { useRef } from "react";
+import React from "react";
 import { generateGradient } from "utils/colors";
-import { saveAs } from "utils/saveAs";
 import { resolutionDivider } from "../../utils/resizers";
 
-const Foreground = () => {
-  const foregroundRef = useRef<HTMLDivElement>(null);
-
+const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivElement> }) => {
   const backgroundContext = useBackground()!;
   const imageContext = useImage()!;
   const dimensionsContext = useDimensions()!;
@@ -36,18 +32,11 @@ const Foreground = () => {
     return { bgGradient: generateGradient(colors, direction) };
   };
 
-  const screenshot = () => {
-    toPng(foregroundRef.current!, { pixelRatio: 1, canvasWidth: width, canvasHeight: height }).then((canvas) => {
-      return saveAs(canvas, "mokkup.jpg");
-    });
-  };
-
   return (
     <Flex flexDirection="column" alignItems="center" justifyContent="center">
-      <Button onClick={screenshot}>Open Modal</Button>
       <Flex
         shadow="lg"
-        ref={foregroundRef}
+        ref={screenshotRef}
         {...imageDimensions}
         transition="all .2s"
         overflow="hidden"
