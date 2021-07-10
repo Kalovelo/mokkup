@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, Flex, useMediaQuery } from "@chakra-ui/react";
 import DeviceWrapper from "containers/DeviceWrapper";
 import { useBackground } from "contexts/Background";
 import { useDimensions } from "contexts/Dimensions";
@@ -19,6 +19,8 @@ const Foreground = () => {
   const width = dimensionsContext.dimensions.resolution?.x!;
   const height = dimensionsContext.dimensions.resolution?.y!;
 
+  // re-calculate image dimensions
+  useMediaQuery("(max-width: 600px)");
   const imageDimensions = {
     w: `${width / resolutionDivider(width, height)}px`,
     h: `${height / resolutionDivider(height, height)}px`,
@@ -39,6 +41,8 @@ const Foreground = () => {
       return saveAs(canvas, "mokkup.jpg");
     });
   };
+
+  React.useEffect(() => {});
 
   return (
     <>
