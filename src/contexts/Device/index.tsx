@@ -1,29 +1,38 @@
-import React, { createContext, useState } from "react";
-import { BROWSER, NONE } from "./constants";
-import { Device } from "./types";
+import React, { createContext } from "react";
+import { BROWSER } from "./constants";
+import { deviceReducer } from "./reducer";
+import { Action, Device } from "./types";
 
 type DeviceContextType = {
   device: Device;
-  setDevice: (device: Device) => void;
+  dispatch: React.Dispatch<Action>;
 };
+const DeviceContext = createContext<DeviceContextType | null>(null);
 
-export const DeviceContext = createContext<DeviceContextType | null>(null);
-
-export const DeviceContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const DeviceProvider = ({ children }: { children: React.ReactNode }) => {
   const defaultState: Device = {
     title: BROWSER,
     options: {
       isDark: true,
       isStealth: true,
       isBarHidden: false,
-      isToggleHidden: false,
+      isBurgerHidden: false,
       url: "https://kalovelo.com",
     },
   };
 
-  const [device, setDevice] = useState<Device>(defaultState);
+  const [device, dispatch] = React.useReducer(deviceReducer, defaultState);
 
-  const providerProps = { device, setDevice };
+  const providerProps = { device, dispatch };
 
-  return <DeviceContext.Provider value={{ ...providerProps }}>{children}</DeviceContext.Provider>;
+  return <DeviceContext.Provider value={providerProps}>{children}</DeviceContext.Provider>;
 };
+
+export function useDevice() {
+  const context = React.useContext(DeviceContext);
+  if (context === undefined) {
+    throw new Error("useDevice must be used within a DeviceProvider");
+  }
+
+  return context;
+}
