@@ -1,17 +1,18 @@
+import { Directions } from "contexts/Background/types";
 import { ColorResult, Color, RGBColor } from "react-color";
 
-export const generateGradient = (colors: string[], direction?: string) => {
+export const generateGradient = (colors: string[], direction: Directions[number] = "to-r") => {
+  if (!colors.length) return null;
   const reducer = (accumulator: string, currentValue: string) => accumulator + currentValue + ",";
-  let gradient = colors.reduce(reducer, `linear(${direction || "to-r"},`);
+  let gradient = colors.reduce(reducer, `linear(${direction},`);
   gradient += ")";
   return gradient;
 };
 
-export const generateShadow = ({ x, y, blur, spread, color }: { x: number; y: number; blur: number; spread: number; color: string }) => {
-  return `${x}px ${y}px ${blur}px ${spread}px ${color}`;
-};
+export const generateShadow = (x: number = 0, y: number = 0, blur: number = 0, spread: number = 0, color: string = "#bbb") =>
+  `${x}px ${y}px ${blur}px ${spread}px ${color}`;
 
-export const formatRGBA = (color: ColorResult | Color | string): string => {
+export const formatRGBA = (color: ColorResult | Color | string) => {
   if ((color as ColorResult).rgb) {
     const { r, g, b, a } = (color as ColorResult).rgb;
     return `rgba(${r},${g},${b},${a})`;
@@ -20,7 +21,6 @@ export const formatRGBA = (color: ColorResult | Color | string): string => {
     const { r, g, b, a } = color as RGBColor;
     return `rgba(${r},${g},${b},${a})`;
   }
-  return color as string;
 };
 
 function _componentToHex(c: string) {

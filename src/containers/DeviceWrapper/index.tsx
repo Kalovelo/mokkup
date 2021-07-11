@@ -9,8 +9,8 @@ import { BEZEL, BROWSER } from "../../contexts/Device/constants";
 
 const DeviceWrapper = ({ image }: { image: string }) => {
   const deviceContext = useDevice()!;
-  const shadowContext = useShadow()!;
-  const shadow = () => generateShadow(shadowContext.shadow);
+  const { x, y, blur, spread, color } = useShadow()!.shadow;
+  const shadow = () => generateShadow(x, y, blur, spread, color);
   const [imageStyles, setimageStyles] = React.useState({});
   const imageRef = React.useRef<HTMLImageElement>(null);
 
