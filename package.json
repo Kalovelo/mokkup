@@ -7,6 +7,7 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@fontsource/manrope": "^4.4.5",
+    "@fontsource/poppins": "^4.5.0",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.8.3",

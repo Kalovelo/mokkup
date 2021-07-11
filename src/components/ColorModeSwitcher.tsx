@@ -12,8 +12,9 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
   return (
     <Box textAlign="right">
       <IconButton
-        size="md"
-        fontSize="lg"
+        display="flex"
+        // size="md"
+        // fontSize="lg"
         variant="ghost"
         color="current"
         justifySelf="flex-end"
