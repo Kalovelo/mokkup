@@ -161,7 +161,7 @@ const DimensionPicker: React.FC = () => {
                   placeholder="0"
                   value={value}
                   defaultValue={value}
-                  onChange={(val) => callback(parseNumberInput(val, min, max))}
+                  onChange={(val) => callback(parseNumberInput(val, { min, max }))}
                 >
                   <NumberInputField textAlign="center" p="2" />
                 </NumberInput>
@@ -187,7 +187,7 @@ const DimensionPicker: React.FC = () => {
               placeholder="0"
               defaultValue={value}
               value={value}
-              onChange={(val) => callback(parseNumberInput(val, min, max))}
+              onChange={(val) => callback(parseNumberInput(val, { min, max }))}
             >
               <NumberInputField textAlign="center" p="2" />
               <NumberInputStepper>

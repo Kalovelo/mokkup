@@ -29,7 +29,8 @@ const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivE
   const background = () => {
     if (colors.length === 0) return { bg: "transparent" };
     if (colors.length === 1) return { bg: colors[0] };
-    return { bgGradient: generateGradient(colors, direction) };
+    const gradient = generateGradient(colors, direction);
+    return gradient && { bgGradient: gradient };
   };
 
   return (

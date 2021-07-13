@@ -21,6 +21,7 @@ export const formatRGBA = (color: ColorResult | Color | string) => {
     const { r, g, b, a } = color as RGBColor;
     return `rgba(${r},${g},${b},${a})`;
   }
+  return color.toString();
 };
 
 function _componentToHex(c: string) {

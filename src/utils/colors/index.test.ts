@@ -1,5 +1,5 @@
 import { ColorResult, RGBColor } from "react-color";
-import { formatHEX, formatRGBA, generateGradient, generateShadow } from "./colors";
+import { formatHEX, formatRGBA, generateGradient, generateShadow } from ".";
 
 describe("colors.generateGradient", () => {
   const colors = ["#cccccc,#aaaaaa,#123456"];

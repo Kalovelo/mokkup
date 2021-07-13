@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 import { useDimensions } from "contexts/Dimensions";
 import { toPng } from "html-to-image";
 import React from "react";
-import { saveAs } from "utils/saveAs";
+import { saveAs } from "utils/save";
 import { DOWNLOAD_TEXT } from "./constants";
 
 const ScreenshotCTA = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivElement> }) => {
@@ -18,7 +18,7 @@ const ScreenshotCTA = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLD
   };
   return (
     <Button w="100%" onClick={screenshot} variant="outline" colorScheme="purple">
-      <label htmlFor="upload">{DOWNLOAD_TEXT}</label>
+      <label htmlFor="donwload">{DOWNLOAD_TEXT}</label>
     </Button>
   );
 };
