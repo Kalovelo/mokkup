@@ -1,5 +1,5 @@
 import { saveAs } from ".";
-import defaultImage from "static/defaultImage.png";
+import defaultImage from "static/defaultImage.jpg";
 
 describe("save.saveAs", () => {
   it("downloads file and names it", async () => {

@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import defaultImage from "static/defaultImage.png";
+import defaultImage from "static/defaultImage.jpg";
 import { imageReducer } from "./reducer";
 import { Action } from "./types";
 

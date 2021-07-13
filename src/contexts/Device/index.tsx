@@ -17,7 +17,7 @@ export const DeviceProvider = ({ children }: { children: React.ReactNode }) => {
       isStealth: true,
       isBarHidden: false,
       isBurgerHidden: false,
-      url: "https://kalovelo.com",
+      url: "https://totally-not-a-coolors-knock-off.com",
     },
   };
 
