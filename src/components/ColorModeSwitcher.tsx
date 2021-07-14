@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useColorMode, useColorModeValue, IconButton, IconButtonProps, Box } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
@@ -13,8 +13,6 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
     <Box textAlign="right">
       <IconButton
         display="flex"
-        // size="md"
-        // fontSize="lg"
         variant="ghost"
         color="current"
         justifySelf="flex-end"

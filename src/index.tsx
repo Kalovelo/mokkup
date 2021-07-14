@@ -1,5 +1,5 @@
 import { Box, ColorModeScript, Flex } from "@chakra-ui/react";
-import * as React from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";

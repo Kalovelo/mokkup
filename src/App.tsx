@@ -6,7 +6,7 @@ import { DeviceProvider } from "contexts/Device";
 import { DimensionsProvider } from "contexts/Dimensions";
 import { ImageProvider } from "contexts/Image";
 import { ShadowProvider } from "contexts/Shadow";
-import * as React from "react";
+import React from "react";
 import Header from "./components/Header";
 import Foreground from "./containers/Foreground";
 import Toolbox from "./containers/Toolbox";
