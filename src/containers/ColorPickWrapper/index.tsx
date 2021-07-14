@@ -36,4 +36,4 @@ const ColorPickWrapper: React.FC<ColorPickWrapperProps> = ({ total }) => {
   );
 };
 
-export default ColorPickWrapper;
+export default React.memo(ColorPickWrapper);

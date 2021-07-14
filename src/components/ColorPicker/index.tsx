@@ -23,4 +23,4 @@ const ColorPicker: React.FC<ColorPickProps> = ({ callback, color }) => {
   );
 };
 
-export default ColorPicker;
+export default React.memo(ColorPicker);
