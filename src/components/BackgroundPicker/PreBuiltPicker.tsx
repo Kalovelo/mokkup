@@ -29,10 +29,10 @@ const PrebuiltPicker: React.FC = () => {
   const colorsPerPage: number = useBreakpointValue({ base: 6, md: 16, lg: 32 })!;
   const totalPages: number = Math.floor(gradients.length / colorsPerPage);
 
-  const handlePick = (colors: string[]) => {
+  function handlePick(colors: string[]) {
     onClose();
     context.dispatch({ type: CHANGE_COLORS, payload: colors });
-  };
+  }
 
   return (
     <>

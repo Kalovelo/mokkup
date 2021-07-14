@@ -32,7 +32,7 @@ const theme = extendTheme({
   },
 });
 
-export const App = () => {
+const App = () => {
   const screenshotRef = React.useRef<HTMLDivElement>(null);
 
   return (
@@ -63,3 +63,5 @@ export const App = () => {
     </BackgroundProvider>
   );
 };
+
+export default App;
