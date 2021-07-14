@@ -24,7 +24,7 @@ const BackgroundPicker: React.FC = () => {
   return (
     <Grid gridGap="10">
       <Box display="flex" gridGap="6" alignItems="center">
-        <Heading as="span" width="80px" fontSize="md" marginRight="auto">
+        <Heading as="span" width="90px" fontSize="md" marginRight="auto">
           Options:
         </Heading>
         <IconButton borderRadius="50%" size="sm" aria-label="Remove color" icon={<BiMinus />} isDisabled={colors.length < 2} onClick={removeColor} />
@@ -33,7 +33,7 @@ const BackgroundPicker: React.FC = () => {
       <ColorPickWrapper total={colors.length} />
       <PrebuiltPicker />
       <Box display="flex" gridGap="6" alignItems="center">
-        <Heading as="span" width="80px" fontSize="md" justifySelf="flex-start" marginRight="auto">
+        <Heading as="span" width="90px" fontSize="md" justifySelf="flex-start" marginRight="auto">
           Direction:
         </Heading>
         <IconButton

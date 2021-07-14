@@ -17,7 +17,7 @@ const DeviceWrapper = ({ image }: { image: string }) => {
     switch (deviceContext.device.title) {
       case BEZEL:
         return setimageStyles({
-          outline: `solid ${(deviceContext.device.options as BezelOptions).color} 10px`,
+          border: `solid ${(deviceContext.device.options as BezelOptions).color} 10px`,
           borderRadius: "2rem",
         });
       default:

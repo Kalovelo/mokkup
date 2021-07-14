@@ -34,7 +34,7 @@ const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivE
   };
 
   return (
-    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+    <Flex flexDirection="column" position="sticky" top="20" alignItems="center" justifyContent="center">
       <Flex
         shadow="lg"
         ref={screenshotRef}
