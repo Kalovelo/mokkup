@@ -61,13 +61,14 @@ const PrebuiltPicker: React.FC = () => {
                   gridGap="3"
                   justifyContent="center"
                   alignItems="center"
+                  aria-label={`Choose ${gradient.name} gradient`}
                 >
                   <Box
                     boxShadow="2xl"
                     width={{ base: "30px", md: "50px" }}
                     height={{ base: "30px", md: "50px" }}
                     borderRadius="50%"
-                    bgGradient={generateGradient(gradient.colors)}
+                    bgGradient={generateGradient(gradient.colors)!}
                   ></Box>
                   <Box height={{ base: "30px", md: "60px" }} display="flex" alignItems="center">
                     <span style={{ whiteSpace: "break-spaces" }}>{gradient.name}</span>
@@ -92,7 +93,7 @@ const PrebuiltPicker: React.FC = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <Button display="flex" onClick={onOpen} alignItems="center" gridGap="2">
+      <Button aria-label={`Open prebuilt uiGradients`} display="flex" onClick={onOpen} alignItems="center" gridGap="2">
         <UiGradientsLogo colorMode={colorMode} />
       </Button>
     </>

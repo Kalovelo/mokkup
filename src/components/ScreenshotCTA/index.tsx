@@ -17,7 +17,7 @@ const ScreenshotCTA = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLD
     });
   };
   return (
-    <Button w="100%" onClick={screenshot} variant="outline" colorScheme="purple">
+    <Button aria-label="Download image" w="100%" onClick={screenshot} variant="outline" colorScheme="purple">
       <label htmlFor="donwload">{DOWNLOAD_TEXT}</label>
     </Button>
   );

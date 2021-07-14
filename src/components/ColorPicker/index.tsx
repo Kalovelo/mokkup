@@ -9,7 +9,16 @@ const ColorPicker: React.FC<ColorPickProps> = ({ callback, color }) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <Button width="100%" display="flex" fontWeight="100" justifyContent="space-between" paddingY="10px" paddingLeft="0" paddingRight="10%">
+        <Button
+          aria-label="Pick color"
+          width="100%"
+          display="flex"
+          fontWeight="100"
+          justifyContent="space-between"
+          paddingY="10px"
+          paddingLeft="0"
+          paddingRight="10%"
+        >
           <Box width="10" borderRadius="5" height="10" bg={color}></Box>
           {formatHEX(color)}
         </Button>

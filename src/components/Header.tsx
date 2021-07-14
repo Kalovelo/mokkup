@@ -6,7 +6,9 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher";
 const Header = () => {
   return (
     <Flex paddingBottom="10" justifyContent="space-between">
-      <Heading fontFamily="poppins">mokkup</Heading>
+      <Heading as="h1" fontFamily="poppins">
+        mokkup
+      </Heading>
       <ColorModeSwitcher />
     </Flex>
   );

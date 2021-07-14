@@ -29,7 +29,7 @@ const DeviceWrapper = ({ image }: { image: string }) => {
   return (
     <>
       {deviceContext.device.title === BROWSER && <BrowserWindow />}
-      <Image maxW="100%" maxH="100%" ref={imageRef} boxShadow={shadow()} src={image} {...imageStyles} />
+      <Image alt="End result preview" maxW="100%" maxH="100%" ref={imageRef} boxShadow={shadow()} src={image} {...imageStyles} />
     </>
   );
 };
