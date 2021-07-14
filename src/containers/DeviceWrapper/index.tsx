@@ -1,4 +1,3 @@
-import { Image } from "@chakra-ui/react";
 import BrowserWindow from "components/BrowserWindow";
 import { useDevice } from "contexts/Device";
 import { BezelOptions } from "contexts/Device/types";
@@ -29,16 +28,13 @@ const DeviceWrapper = ({ image }: { image: string }) => {
   return (
     <>
       {deviceContext.device.title === BROWSER && <BrowserWindow />}
-      <Image
+      <img
         width="100%"
         height="100%"
         alt="End result preview"
-        maxW="100%"
-        maxH="100%"
+        style={{ boxShadow: shadow(), maxWidth: "100%", maxHeight: "100%", ...imageStyles }}
         ref={imageRef}
-        boxShadow={shadow()}
         src={image}
-        {...imageStyles}
       />
     </>
   );

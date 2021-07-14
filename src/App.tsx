@@ -1,7 +1,4 @@
 import { Box, ChakraProvider, ColorMode, extendTheme, Grid, GridItem } from "@chakra-ui/react";
-import "@fontsource/manrope/400.css";
-import "@fontsource/manrope/700.css";
-import "@fontsource/poppins/500.css";
 import ImagePicker from "components/ImagePicker";
 import ScreenshotCTA from "components/ScreenshotCTA";
 import { BackgroundProvider } from "contexts/Background";
