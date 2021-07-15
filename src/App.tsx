@@ -1,4 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/react";
+import CookieNotice from "components/CookieNotice";
 import Footer from "components/Footer";
 import ImagePicker from "components/ImagePicker";
 import ScreenshotCTA from "components/ScreenshotCTA";
@@ -35,6 +36,7 @@ const App = () => {
                 </Grid>
                 <Footer />
               </Grid>
+              <CookieNotice />
             </DimensionsProvider>
           </ImageProvider>
         </ShadowProvider>
@@ -43,4 +45,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default React.memo(App);
