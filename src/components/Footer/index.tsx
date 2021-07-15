@@ -23,6 +23,7 @@ const Footer = () => (
       display="flex"
       href="https://kalovelo.com"
       target="_blank"
+      rel="noopener"
     >
       crafted by Kalovelo
       <Box w="5">

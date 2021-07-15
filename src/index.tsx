@@ -1,12 +1,9 @@
-import { Box, ChakraProvider, ColorMode, ColorModeScript, extendTheme, Flex, useColorModeValue } from "@chakra-ui/react";
-import { css } from "@emotion/react";
+import { ChakraProvider, ColorMode, ColorModeScript, extendTheme } from "@chakra-ui/react";
+import App from "App";
 import React from "react";
 import ReactDOM from "react-dom";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
-
-const App = React.lazy(() => import("./App"));
 
 export interface ChakraConfig {
   initialColorMode: ColorMode;
@@ -26,26 +23,11 @@ const theme = extendTheme({
   },
 });
 
-const Loading = () => {
-  const override = css`
-    background: transparent !important;
-  `;
-
-  return (
-    <Flex bg={useColorModeValue("white", "gray.800")} w="100vw" h="100vh" justifyContent="center" alignItems="center">
-      <Box>
-        <ClimbingBoxLoader css={override} color={useColorModeValue("#000", "#fff")} loading size={15} />
-      </Box>
-    </Flex>
-  );
-};
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
     <ChakraProvider theme={theme}>
-      <React.Suspense fallback={<Loading />}>
-        <App />
-      </React.Suspense>
+      <App />
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
