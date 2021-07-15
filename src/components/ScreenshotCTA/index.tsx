@@ -13,7 +13,7 @@ const ScreenshotCTA = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLD
 
   const screenshot = () => {
     toPng(screenshotRef.current!, { pixelRatio: 1, canvasWidth: width, canvasHeight: height }).then((canvas) => {
-      return saveAs(canvas, "mokkup.jpg");
+      return saveAs(canvas, "mokkup.png");
     });
   };
   return (

@@ -1,4 +1,5 @@
-import { Box, ChakraProvider, ColorMode, extendTheme, Grid, GridItem } from "@chakra-ui/react";
+import { Box, ChakraProvider, ColorMode, extendTheme, Flex, Grid, GridItem } from "@chakra-ui/react";
+import Footer from "components/Footer";
 import ImagePicker from "components/ImagePicker";
 import ScreenshotCTA from "components/ScreenshotCTA";
 import { BackgroundProvider } from "contexts/Background";
@@ -39,7 +40,7 @@ const App = () => {
           <ImageProvider>
             <DimensionsProvider>
               <ChakraProvider theme={theme}>
-                <Box p={{ base: 3, md: "7" }} fontSize="xl">
+                <Grid gridTemplateRows="min-content" minH="100vh" p={{ base: 3, md: "7" }} fontSize="xl">
                   <Header />
                   <Grid gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", lg: "1fr 1fr", xl: "450px 1fr" }}>
                     <GridItem display="grid" gridGap="2">
@@ -51,7 +52,8 @@ const App = () => {
                       <Foreground screenshotRef={screenshotRef} />
                     </GridItem>
                   </Grid>
-                </Box>
+                  <Footer />
+                </Grid>
               </ChakraProvider>
             </DimensionsProvider>
           </ImageProvider>
