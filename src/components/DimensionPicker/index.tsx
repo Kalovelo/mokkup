@@ -35,6 +35,9 @@ import {
   WIDTH_LABEL,
   WIDTH_RIGHT_LABEL,
   WIDTH_TOOLTIP,
+  Item,
+  Option_Type,
+  PREBUILT_DIMENSIONS_TEST_ID,
 } from "./constants";
 import { getUploadedImageDimensions } from "./utils";
 
@@ -55,19 +58,7 @@ const DimensionPicker: React.FC = () => {
   const changeWidth = (width: number) => context.dispatch({ type: CHANGE_WIDTH, payload: width });
   const changeHeight = (height: number) => context.dispatch({ type: CHANGE_HEIGHT, payload: height });
 
-  type Option_Type = { value: string; label: JSX.Element | string };
-
-  type gridItem = {
-    label: string;
-    callback: (val: number) => void;
-    value: number;
-    tooltip: string;
-    min?: number;
-    max?: number;
-    rightLabel?: string;
-  };
-
-  const gridItems: gridItem[] = [
+  const gridItems: Item[] = [
     {
       label: SCALE_LABEL,
       callback: changeScale,
@@ -79,7 +70,7 @@ const DimensionPicker: React.FC = () => {
     },
   ];
 
-  const resolutionItems: gridItem[] = [
+  const resolutionItems: Item[] = [
     {
       label: WIDTH_LABEL,
       callback: changeWidth,
@@ -137,6 +128,7 @@ const DimensionPicker: React.FC = () => {
     <Grid gridGap="10">
       <GridItem>
         <StackRadioGroup
+          testId={PREBUILT_DIMENSIONS_TEST_ID}
           styles={{ gridGap: "0.2rem" }}
           defaultValue={TWITTER_POST_TITLE}
           name="device type"
@@ -153,6 +145,7 @@ const DimensionPicker: React.FC = () => {
                   <InputLeftAddon fontSize=".7rem" p="1" justifyContent="center" children={label} />
                 </Tooltip>
                 <NumberInput
+                  data-testid={label}
                   min={min}
                   w="100%"
                   max={max}

@@ -1,3 +1,4 @@
+import { TWITTER_POST_SIZE } from "components/DimensionPicker/constants";
 import React, { createContext } from "react";
 import { dimensionsReducer } from "./reducer";
 import { Action, Dimensions } from "./types";
@@ -12,10 +13,7 @@ const DimensionsContext = createContext<DimensionsContextType | null>(null);
 export const DimensionsProvider = ({ children }: { children: React.ReactNode }) => {
   const defaultDimensions: Dimensions = {
     scale: 1,
-    resolution: {
-      x: 1200,
-      y: 650,
-    },
+    resolution: TWITTER_POST_SIZE,
   };
   const [dimensions, dispatch] = React.useReducer(dimensionsReducer, defaultDimensions);
 

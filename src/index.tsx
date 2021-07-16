@@ -1,34 +1,14 @@
-import { ChakraProvider, ColorMode, ColorModeScript, extendTheme } from "@chakra-ui/react";
+import { ColorModeScript } from "@chakra-ui/react";
 import App from "App";
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 
-export interface ChakraConfig {
-  initialColorMode: ColorMode;
-  useSystemColorMode: boolean;
-}
-
-const config: ChakraConfig = {
-  initialColorMode: "dark",
-  useSystemColorMode: true,
-};
-
-const theme = extendTheme({
-  config,
-  fonts: {
-    heading: "Manrope",
-    body: "Manrope",
-  },
-});
-
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

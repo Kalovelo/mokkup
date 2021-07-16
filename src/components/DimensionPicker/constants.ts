@@ -1,3 +1,15 @@
+export type Option_Type = { value: string; label: JSX.Element | string };
+
+export type Item = {
+  label: string;
+  callback: (val: number) => void;
+  value: number;
+  tooltip: string;
+  min?: number;
+  max?: number;
+  rightLabel?: string;
+};
+
 export const TWITTER_POST_TITLE = "Twitter post";
 export const TWITTER_POST_SIZE = { x: 1200, y: 630 };
 
@@ -20,3 +32,5 @@ export const WIDTH_RIGHT_LABEL = "px";
 export const HEIGHT_LABEL = "Height:";
 export const HEIGHT_TOOLTIP = "Height Value is in px.";
 export const HEIGHT_RIGHT_LABEL = "px";
+
+export const PREBUILT_DIMENSIONS_TEST_ID = "Prebuilt Dimensions";

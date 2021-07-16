@@ -5,12 +5,13 @@ import WrapRadio from "../../components/WrapRadio";
 type StackRadioGroupProps = {
   options: { value: string | number; label: JSX.Element | string }[];
   name: string;
+  testId?: string;
   callback?: (nextValue: any) => void;
   defaultValue?: string;
   styles?: GridProps;
 };
 
-const StackRadioGroup: React.FC<StackRadioGroupProps> = ({ options, name, callback, defaultValue, styles }) => {
+const StackRadioGroup: React.FC<StackRadioGroupProps> = ({ options, name, callback, defaultValue, styles, testId }) => {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: name,
     defaultValue,
@@ -21,6 +22,7 @@ const StackRadioGroup: React.FC<StackRadioGroupProps> = ({ options, name, callba
 
   return (
     <Grid
+      data-testid={testId}
       {...styles}
       justifyContent="space-evenly"
       gridTemplateColumns={{ base: `repeat(${options.length},minmax(20px, 80px))`, md: `repeat(${options.length},minmax(80px, 100px))` }}

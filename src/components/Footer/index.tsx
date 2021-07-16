@@ -25,10 +25,11 @@ const Footer = () => (
       target="_blank"
       rel="noopener"
     >
-      crafted by Kalovelo
+      crafted by
       <Box w="5">
         <Kalovelogo />
       </Box>
+      Kalovelo
     </Link>
   </Flex>
 );

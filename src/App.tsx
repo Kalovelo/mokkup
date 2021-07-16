@@ -1,4 +1,4 @@
-import { Box, Fade, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+import { Box, ChakraProvider, ColorMode, ColorModeScript, extendTheme, Fade, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import CookieNotice from "components/CookieNotice";
 import Footer from "components/Footer";
@@ -14,6 +14,24 @@ import { ClimbingBoxLoader } from "react-spinners";
 import Header from "./components/Header";
 import Foreground from "./containers/Foreground";
 import Toolbox from "./containers/Toolbox";
+
+export interface ChakraConfig {
+  initialColorMode: ColorMode;
+  useSystemColorMode: boolean;
+}
+
+const config: ChakraConfig = {
+  initialColorMode: "dark",
+  useSystemColorMode: true,
+};
+
+const theme = extendTheme({
+  config,
+  fonts: {
+    heading: "Manrope",
+    body: "Manrope",
+  },
+});
 
 const Loading = () => {
   const override = css`
@@ -35,34 +53,39 @@ const App = () => {
   }, []);
 
   return (
-    <BackgroundProvider>
-      <DeviceProvider>
-        <ShadowProvider>
-          <ImageProvider>
-            <DimensionsProvider>
-              <Fade unmountOnExit in={showLoader}>
-                <Loading />
-              </Fade>
-              <Grid display={showLoader ? "none" : "grid"} gridTemplateRows="min-content" minH="100vh" p={{ base: 3, md: "7" }} fontSize="xl">
-                <Header />
-                <Grid gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", lg: "1fr 1fr", xl: "450px 1fr" }}>
-                  <GridItem display="grid" gridGap="2">
-                    <ImagePicker />
-                    <Toolbox />
-                    <ScreenshotCTA screenshotRef={screenshotRef} />
-                  </GridItem>
-                  <GridItem>
-                    <Foreground screenshotRef={screenshotRef} />
-                  </GridItem>
-                </Grid>
-                <Footer />
-              </Grid>
-              <CookieNotice />
-            </DimensionsProvider>
-          </ImageProvider>
-        </ShadowProvider>
-      </DeviceProvider>
-    </BackgroundProvider>
+    <>
+      <ColorModeScript />
+      <BackgroundProvider>
+        <DeviceProvider>
+          <ShadowProvider>
+            <ImageProvider>
+              <DimensionsProvider>
+                <ChakraProvider theme={theme}>
+                  <Fade unmountOnExit in={showLoader}>
+                    <Loading />
+                  </Fade>
+                  <Grid display={showLoader ? "none" : "grid"} gridTemplateRows="min-content" minH="100vh" p={{ base: 3, md: "7" }} fontSize="xl">
+                    <Header />
+                    <Grid gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", lg: "1fr 1fr", xl: "450px 1fr" }}>
+                      <GridItem display="grid" gridGap="2">
+                        <ImagePicker />
+                        <Toolbox />
+                        <ScreenshotCTA screenshotRef={screenshotRef} />
+                      </GridItem>
+                      <GridItem>
+                        <Foreground screenshotRef={screenshotRef} />
+                      </GridItem>
+                    </Grid>
+                    <Footer />
+                  </Grid>
+                  <CookieNotice />
+                </ChakraProvider>
+              </DimensionsProvider>
+            </ImageProvider>
+          </ShadowProvider>
+        </DeviceProvider>
+      </BackgroundProvider>
+    </>
   );
 };
 

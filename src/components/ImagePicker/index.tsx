@@ -9,11 +9,6 @@ const ALLOWED_FILE_TYPES = ["image/png", "image/jpeg", "image/gif"];
 const ImagePicker: React.FC = () => {
   const context = useImage()!;
   const inputRef = React.useRef<HTMLLabelElement>(null);
-  const [hasImage, sethasImage] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    sethasImage(!!context?.image);
-  }, [context?.image]);
 
   const triggerUploadFile = () => inputRef.current?.click();
 
@@ -28,7 +23,7 @@ const ImagePicker: React.FC = () => {
 
   return (
     <>
-      <Button aria-label="Upload file" w="100%" onClick={triggerUploadFile} variant="outline" colorScheme={hasImage ? "gray" : "purple"}>
+      <Button aria-label="Upload file" w="100%" onClick={triggerUploadFile} variant="outline">
         <label ref={inputRef} htmlFor="upload">
           {CTA_TEXT}
         </label>

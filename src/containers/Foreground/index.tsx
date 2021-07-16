@@ -36,6 +36,7 @@ const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivE
   return (
     <Flex flexDirection="column" position="sticky" top="20" alignItems="center" justifyContent="center">
       <Flex
+        data-testid="foregroundWrapper"
         shadow="lg"
         ref={screenshotRef}
         {...imageDimensions}
@@ -46,7 +47,7 @@ const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivE
         flexDirection="column"
         {...background()}
       >
-        <Flex flexDir="column" transform={`scale(${imageScale})`}>
+        <Flex data-testid="foreground" flexDir="column" transform={`scale(${imageScale})`}>
           <DeviceWrapper image={image!} />
         </Flex>
       </Flex>
