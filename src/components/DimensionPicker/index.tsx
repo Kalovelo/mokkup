@@ -1,14 +1,16 @@
 import {
   Grid,
   GridItem,
+  Heading,
   InputGroup,
   InputLeftAddon,
   InputRightAddon,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
-  NumberInputStepper,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
   Tooltip,
 } from "@chakra-ui/react";
 import StackRadioGroup from "containers/StackRadioGroup";
@@ -26,18 +28,16 @@ import {
   INSTAGRAM_POST_TITLE,
   INSTAGRAM_STORY_SIZE,
   INSTAGRAM_STORY_TITLE,
+  Item,
+  Option_Type,
   ORIGINAL_SIZE_TITLE,
+  PREBUILT_DIMENSIONS_TEST_ID,
   SCALE_LABEL,
-  SCALE_RIGHT_LABEL,
-  SCALE_TOOLTIP,
   TWITTER_POST_SIZE,
   TWITTER_POST_TITLE,
   WIDTH_LABEL,
   WIDTH_RIGHT_LABEL,
   WIDTH_TOOLTIP,
-  Item,
-  Option_Type,
-  PREBUILT_DIMENSIONS_TEST_ID,
 } from "./constants";
 import { getUploadedImageDimensions } from "./utils";
 
@@ -58,17 +58,11 @@ const DimensionPicker: React.FC = () => {
   const changeWidth = (width: number) => context.dispatch({ type: CHANGE_WIDTH, payload: width });
   const changeHeight = (height: number) => context.dispatch({ type: CHANGE_HEIGHT, payload: height });
 
-  const gridItems: Item[] = [
-    {
-      label: SCALE_LABEL,
-      callback: changeScale,
-      value: Math.round(context.dimensions.scale * 100),
-      tooltip: SCALE_TOOLTIP,
-      min: 0,
-      max: 100,
-      rightLabel: SCALE_RIGHT_LABEL,
-    },
-  ];
+  const scale = {
+    label: SCALE_LABEL,
+    callback: changeScale,
+    value: Math.round(context.dimensions.scale * 100),
+  };
 
   const resolutionItems: Item[] = [
     {
@@ -165,33 +159,19 @@ const DimensionPicker: React.FC = () => {
         </Grid>
       </GridItem>
 
-      {gridItems.map(({ label, callback, tooltip, value, min, max, rightLabel }, index) => (
-        <GridItem key={index} display="flex" gridGap="1rem" alignItems="center">
-          <InputGroup>
-            <Tooltip label={tooltip}>
-              <InputLeftAddon fontSize=".9rem" justifyContent="center" children={label} />
-            </Tooltip>
-            <NumberInput
-              min={min}
-              max={max}
-              textAlign="center"
-              inputMode="numeric"
-              w="100%"
-              placeholder="0"
-              defaultValue={value}
-              value={value}
-              onChange={(val) => callback(parseNumberInput(val, { min, max }))}
-            >
-              <NumberInputField textAlign="center" p="2" />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-            <InputRightAddon children={rightLabel} />
-          </InputGroup>
-        </GridItem>
-      ))}
+      <GridItem>
+        <Grid>
+          <Heading fontWeight="0" paddingBottom="4" fontSize="lg" as="span">
+            {scale.label}
+          </Heading>
+          <Slider onChange={scale.callback} colorScheme="teal" aria-label="scale-slider" value={scale.value}>
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+        </Grid>
+      </GridItem>
     </Grid>
   );
 };

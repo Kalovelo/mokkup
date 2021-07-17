@@ -23,7 +23,7 @@ const ColorPicker: React.FC<ColorPickProps> = ({ callback, color }) => {
           {formatHEX(color)}
         </Button>
       </PopoverTrigger>
-      <PopoverContent width="max-content">
+      <PopoverContent data-testid="colorPickerPopOver" width="max-content">
         <PopoverArrow />
         <PopoverCloseButton />
         <ChromePicker color={formatRGBA(color)} onChange={callback} />
