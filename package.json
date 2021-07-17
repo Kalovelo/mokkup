@@ -49,6 +49,7 @@
     "@types/react-color": "^3.0.4",
     "@types/react-dom": "^16.9.13",
     "jest-matchmedia-mock": "^1.1.0",
+    "mq-polyfill": "^1.1.8",
     "typescript": "^3.9.9"
   }
 }

@@ -26,7 +26,7 @@ const PrebuiltPicker: React.FC = () => {
   const [currentPage, setcurrentPage] = useState<number>(0);
   const context = useBackground()!;
 
-  const colorsPerPage: number = useBreakpointValue({ base: 6, md: 16, lg: 32 })!;
+  const colorsPerPage: number = useBreakpointValue({ base: 6, md: 16, lg: 32 }) || 6;
   const totalPages: number = Math.floor(gradients.length / colorsPerPage);
 
   function handlePick(colors: string[]) {
