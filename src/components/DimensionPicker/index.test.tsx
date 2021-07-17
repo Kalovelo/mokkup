@@ -42,29 +42,55 @@ describe("DimensionPicker", () => {
 
   const { getByDisplayValue, getByTestId } = getQueriesForElement(root);
   it("renders 4 types of dimension options", () => {
-    expect(getByTestId(PREBUILT_DIMENSIONS_TEST_ID).querySelectorAll("label").length).toBe(4);
+    expect(
+      getByTestId(PREBUILT_DIMENSIONS_TEST_ID).querySelectorAll("label").length
+    ).toBe(4);
   });
 
   it(`has ${TWITTER_POST_TITLE} option checked by default`, () => {
-    expect((getByDisplayValue(TWITTER_POST_TITLE) as HTMLInputElement).checked).toBeTruthy();
+    expect(
+      (getByDisplayValue(TWITTER_POST_TITLE) as HTMLInputElement).checked
+    ).toBeTruthy();
     const { x, y } = TWITTER_POST_SIZE;
-    expect((getByTestId(WIDTH_LABEL).children[0] as HTMLInputElement).value).toBe(x.toString());
-    expect((getByTestId(HEIGHT_LABEL).children[0] as HTMLInputElement).value).toBe(y.toString());
+    expect(
+      (getByTestId(WIDTH_LABEL).children[0] as HTMLInputElement).value
+    ).toBe(x.toString());
+    expect(
+      (getByTestId(HEIGHT_LABEL).children[0] as HTMLInputElement).value
+    ).toBe(y.toString());
   });
 
   it(`has ${INSTAGRAM_POST_TITLE} size when checked`, () => {
-    fireEvent(getByDisplayValue(INSTAGRAM_POST_TITLE), new MouseEvent("click", { bubbles: true }));
-    expect((getByDisplayValue(INSTAGRAM_POST_TITLE) as HTMLInputElement).checked).toBeTruthy();
+    fireEvent(
+      getByDisplayValue(INSTAGRAM_POST_TITLE),
+      new MouseEvent("click", { bubbles: true })
+    );
+    expect(
+      (getByDisplayValue(INSTAGRAM_POST_TITLE) as HTMLInputElement).checked
+    ).toBeTruthy();
     const { x, y } = INSTAGRAM_POST_SIZE;
-    expect((getByTestId(WIDTH_LABEL).children[0] as HTMLInputElement).value).toBe(x.toString());
-    expect((getByTestId(HEIGHT_LABEL).children[0] as HTMLInputElement).value).toBe(y.toString());
+    expect(
+      (getByTestId(WIDTH_LABEL).children[0] as HTMLInputElement).value
+    ).toBe(x.toString());
+    expect(
+      (getByTestId(HEIGHT_LABEL).children[0] as HTMLInputElement).value
+    ).toBe(y.toString());
   });
 
   it(`has ${INSTAGRAM_STORY_TITLE} size when checked`, () => {
-    fireEvent(getByDisplayValue(INSTAGRAM_STORY_TITLE), new MouseEvent("click", { bubbles: true }));
-    expect((getByDisplayValue(INSTAGRAM_STORY_TITLE) as HTMLInputElement).checked).toBeTruthy();
+    fireEvent(
+      getByDisplayValue(INSTAGRAM_STORY_TITLE),
+      new MouseEvent("click", { bubbles: true })
+    );
+    expect(
+      (getByDisplayValue(INSTAGRAM_STORY_TITLE) as HTMLInputElement).checked
+    ).toBeTruthy();
     const { x, y } = INSTAGRAM_STORY_SIZE;
-    expect((getByTestId(WIDTH_LABEL).children[0] as HTMLInputElement).value).toBe(x.toString());
-    expect((getByTestId(HEIGHT_LABEL).children[0] as HTMLInputElement).value).toBe(y.toString());
+    expect(
+      (getByTestId(WIDTH_LABEL).children[0] as HTMLInputElement).value
+    ).toBe(x.toString());
+    expect(
+      (getByTestId(HEIGHT_LABEL).children[0] as HTMLInputElement).value
+    ).toBe(y.toString());
   });
 });

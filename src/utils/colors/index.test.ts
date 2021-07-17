@@ -5,17 +5,21 @@ describe("colors.generateGradient", () => {
   const colors = ["#cccccc,#aaaaaa,#123456"];
   const direction = "to-r";
   it("returns a linear-gradient Chakra property", () => {
-    expect(generateGradient(colors, direction)).toBe("linear(to-r,#cccccc,#aaaaaa,#123456,)");
+    expect(generateGradient(colors, direction)).toBe(
+      "linear(to-r,#cccccc,#aaaaaa,#123456,)"
+    );
   });
 
-  it("returns null when given no colors", () => {
-    expect(generateGradient([], direction)).toBe(null);
+  it("Throws error when given no colors", () => {
+    expect(() => generateGradient([], direction)).toThrowError();
   });
 });
 
 describe("colors.generateShadow", () => {
   it("returns a boxShadow property", () => {
-    expect(generateShadow(1, 2, 3, 4, "#cccccc")).toBe("1px 2px 3px 4px #cccccc");
+    expect(generateShadow(1, 2, 3, 4, "#cccccc")).toBe(
+      "1px 2px 3px 4px #cccccc"
+    );
   });
 });
 

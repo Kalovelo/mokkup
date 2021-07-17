@@ -6,9 +6,9 @@ import React from "react";
 import { generateShadow } from "utils/colors";
 import { BEZEL, BROWSER } from "../../contexts/Device/constants";
 
-const DeviceWrapper = ({ image }: { image: string }) => {
-  const deviceContext = useDevice()!;
-  const { x, y, blur, spread, color } = useShadow()!.shadow;
+const DeviceWrapper = ({ image }: { image: string }): JSX.Element => {
+  const deviceContext = useDevice();
+  const { x, y, blur, spread, color } = useShadow().shadow;
   const shadow = () => generateShadow(x, y, blur, spread, color);
   const [imageStyles, setimageStyles] = React.useState({});
   const imageRef = React.useRef<HTMLImageElement>(null);
@@ -17,7 +17,9 @@ const DeviceWrapper = ({ image }: { image: string }) => {
     switch (deviceContext.device.title) {
       case BEZEL:
         return setimageStyles({
-          border: `solid ${(deviceContext.device.options as BezelOptions).color} 10px`,
+          border: `solid ${
+            (deviceContext.device.options as BezelOptions).color
+          } 10px`,
           borderRadius: "2rem",
         });
       default:
@@ -32,7 +34,12 @@ const DeviceWrapper = ({ image }: { image: string }) => {
         width="100%"
         height="100%"
         alt="End result preview"
-        style={{ boxShadow: shadow(), maxWidth: "100%", maxHeight: "100%", ...imageStyles }}
+        style={{
+          boxShadow: shadow(),
+          maxWidth: "100%",
+          maxHeight: "100%",
+          ...imageStyles,
+        }}
         ref={imageRef}
         src={image}
       />

@@ -39,8 +39,12 @@ describe("BackgroundPicker", () => {
   it("Changes color on color pick", () => {
     defaultRender();
     const [c1] = screen.getAllByLabelText("Pick color");
-    const colorPicker = screen.getAllByTestId("colorPickerPopOver")[0]?.querySelector("input");
-    fireEvent.change(colorPicker as HTMLInputElement, { target: { value: "#cccccc" } });
+    const colorPicker = screen
+      .getAllByTestId("colorPickerPopOver")[0]
+      ?.querySelector("input");
+    fireEvent.change(colorPicker as HTMLInputElement, {
+      target: { value: "#cccccc" },
+    });
     expect(c1.childNodes[1].textContent).toBe("#cccccc");
   });
 
@@ -94,7 +98,9 @@ describe("BackgroundPicker.PrebuiltPicker", () => {
   it("Updates current gradient combination with 3 options", () => {
     const gradient_button = screen.getByLabelText("Open prebuilt uiGradients");
     fireEvent.click(gradient_button);
-    const chosen_gradient = screen.getByLabelText("Choose Radioactive Heat gradient");
+    const chosen_gradient = screen.getByLabelText(
+      "Choose Radioactive Heat gradient"
+    );
     fireEvent.click(chosen_gradient);
     const colors = screen.getAllByLabelText("Pick color");
     expect(colors.length).toBe(3);

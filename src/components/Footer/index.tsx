@@ -4,8 +4,16 @@ import { css } from "@emotion/react";
 import Kalovelogo from "components/Kalovelogo";
 import React from "react";
 
-const Footer = () => (
-  <Flex fontSize="md" marginTop="70px" gridGap="2" justifyContent="center" alignSelf="flex-end" justifySelf="flex-end" w="100%">
+const Footer = (): JSX.Element => (
+  <Flex
+    fontSize="md"
+    marginTop="70px"
+    gridGap="2"
+    justifyContent="center"
+    alignSelf="flex-end"
+    justifySelf="flex-end"
+    w="100%"
+  >
     <Link
       color={useColorModeValue("blackAlpha.700", "whiteAlpha.700")}
       _hover={{

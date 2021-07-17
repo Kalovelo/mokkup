@@ -15,7 +15,12 @@ import {
 } from "@chakra-ui/react";
 import StackRadioGroup from "containers/StackRadioGroup";
 import { useDimensions } from "contexts/Dimensions";
-import { CHANGE_HEIGHT, CHANGE_RESOLUTION, CHANGE_SCALE, CHANGE_WIDTH } from "contexts/Dimensions/constants";
+import {
+  CHANGE_HEIGHT,
+  CHANGE_RESOLUTION,
+  CHANGE_SCALE,
+  CHANGE_WIDTH,
+} from "contexts/Dimensions/constants";
 import { useImage } from "contexts/Image";
 import React from "react";
 import { scaleDivider } from "utils/resizers";
@@ -41,22 +46,27 @@ import {
 } from "./constants";
 import { getUploadedImageDimensions } from "./utils";
 
-const DimensionPicker: React.FC = () => {
-  const context = useDimensions()!;
-  const imageContext = useImage()!;
+const DimensionPicker = (): JSX.Element => {
+  const context = useDimensions();
+  const imageContext = useImage();
 
   React.useEffect(() => {
     const setScale = async () => {
-      const { x, y } = (await getUploadedImageDimensions(imageContext.image!)) as { x: number; y: number };
+      const { x, y } = (await getUploadedImageDimensions(
+        imageContext.image
+      )) as { x: number; y: number };
       context.dispatch({ type: CHANGE_SCALE, payload: scaleDivider(x, y) });
     };
     setScale();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageContext.image, getUploadedImageDimensions]);
 
-  const changeScale = (scale: number) => context.dispatch({ type: CHANGE_SCALE, payload: scale / 100 });
-  const changeWidth = (width: number) => context.dispatch({ type: CHANGE_WIDTH, payload: width });
-  const changeHeight = (height: number) => context.dispatch({ type: CHANGE_HEIGHT, payload: height });
+  const changeScale = (scale: number) =>
+    context.dispatch({ type: CHANGE_SCALE, payload: scale / 100 });
+  const changeWidth = (width: number) =>
+    context.dispatch({ type: CHANGE_WIDTH, payload: width });
+  const changeHeight = (height: number) =>
+    context.dispatch({ type: CHANGE_HEIGHT, payload: height });
 
   const scale = {
     label: SCALE_LABEL,
@@ -68,14 +78,14 @@ const DimensionPicker: React.FC = () => {
     {
       label: WIDTH_LABEL,
       callback: changeWidth,
-      value: context.dimensions.resolution!.x,
+      value: context.dimensions.resolution.x,
       tooltip: WIDTH_TOOLTIP,
       rightLabel: WIDTH_RIGHT_LABEL,
     },
     {
       label: HEIGHT_LABEL,
       callback: changeHeight,
-      value: context.dimensions.resolution!.y,
+      value: context.dimensions.resolution.y,
       tooltip: HEIGHT_TOOLTIP,
       rightLabel: HEIGHT_RIGHT_LABEL,
     },
@@ -101,19 +111,35 @@ const DimensionPicker: React.FC = () => {
   ];
 
   const handleChange = async (
-    nextValue: typeof ORIGINAL_SIZE_TITLE | typeof TWITTER_POST_TITLE | typeof INSTAGRAM_POST_TITLE | typeof INSTAGRAM_STORY_TITLE
+    nextValue:
+      | typeof ORIGINAL_SIZE_TITLE
+      | typeof TWITTER_POST_TITLE
+      | typeof INSTAGRAM_POST_TITLE
+      | typeof INSTAGRAM_STORY_TITLE
   ) => {
     switch (nextValue) {
       case TWITTER_POST_TITLE:
-        return context.dispatch({ type: CHANGE_RESOLUTION, payload: TWITTER_POST_SIZE });
+        return context.dispatch({
+          type: CHANGE_RESOLUTION,
+          payload: TWITTER_POST_SIZE,
+        });
       case INSTAGRAM_POST_TITLE:
-        return context.dispatch({ type: CHANGE_RESOLUTION, payload: INSTAGRAM_POST_SIZE });
+        return context.dispatch({
+          type: CHANGE_RESOLUTION,
+          payload: INSTAGRAM_POST_SIZE,
+        });
       case INSTAGRAM_STORY_TITLE:
-        return context.dispatch({ type: CHANGE_RESOLUTION, payload: INSTAGRAM_STORY_SIZE });
+        return context.dispatch({
+          type: CHANGE_RESOLUTION,
+          payload: INSTAGRAM_STORY_SIZE,
+        });
       case ORIGINAL_SIZE_TITLE:
         return context.dispatch({
           type: CHANGE_RESOLUTION,
-          payload: (await getUploadedImageDimensions(imageContext.image!)) as { x: number; y: number },
+          payload: (await getUploadedImageDimensions(imageContext.image)) as {
+            x: number;
+            y: number;
+          },
         });
     }
   };
@@ -132,30 +158,48 @@ const DimensionPicker: React.FC = () => {
       </GridItem>
       <GridItem>
         <Grid gridGap="0.5rem" templateColumns="1fr 1fr">
-          {resolutionItems.map(({ label, callback, tooltip, value, min, max, rightLabel }, index) => (
-            <GridItem gridRow="2" key={index} display="flex" gridGap="1rem" alignItems="center">
-              <InputGroup>
-                <Tooltip label={tooltip}>
-                  <InputLeftAddon fontSize=".7rem" p="1" justifyContent="center" children={label} />
-                </Tooltip>
-                <NumberInput
-                  data-testid={label}
-                  min={min}
-                  w="100%"
-                  max={max}
-                  textAlign="center"
-                  inputMode="numeric"
-                  placeholder="0"
-                  value={value}
-                  defaultValue={value}
-                  onChange={(val) => callback(parseNumberInput(val, { min, max }))}
-                >
-                  <NumberInputField textAlign="center" p="2" />
-                </NumberInput>
-                <InputRightAddon fontSize=".7rem" children={rightLabel} />
-              </InputGroup>
-            </GridItem>
-          ))}
+          {resolutionItems.map(
+            (
+              { label, callback, tooltip, value, min, max, rightLabel },
+              index
+            ) => (
+              <GridItem
+                gridRow="2"
+                key={index}
+                display="flex"
+                gridGap="1rem"
+                alignItems="center"
+              >
+                <InputGroup>
+                  <Tooltip label={tooltip}>
+                    <InputLeftAddon
+                      fontSize=".7rem"
+                      p="1"
+                      justifyContent="center"
+                      children={label}
+                    />
+                  </Tooltip>
+                  <NumberInput
+                    data-testid={label}
+                    min={min}
+                    w="100%"
+                    max={max}
+                    textAlign="center"
+                    inputMode="numeric"
+                    placeholder="0"
+                    value={value}
+                    defaultValue={value}
+                    onChange={(val) =>
+                      callback(parseNumberInput(val, { min, max }))
+                    }
+                  >
+                    <NumberInputField textAlign="center" p="2" />
+                  </NumberInput>
+                  <InputRightAddon fontSize=".7rem" children={rightLabel} />
+                </InputGroup>
+              </GridItem>
+            )
+          )}
         </Grid>
       </GridItem>
 
@@ -164,7 +208,12 @@ const DimensionPicker: React.FC = () => {
           <Heading fontWeight="0" paddingBottom="4" fontSize="lg" as="span">
             {scale.label}
           </Heading>
-          <Slider onChange={scale.callback} colorScheme="teal" aria-label="scale-slider" value={scale.value}>
+          <Slider
+            onChange={scale.callback}
+            colorScheme="teal"
+            aria-label="scale-slider"
+            value={scale.value}
+          >
             <SliderTrack>
               <SliderFilledTrack />
             </SliderTrack>

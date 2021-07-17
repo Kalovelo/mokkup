@@ -1,4 +1,4 @@
-export const getUploadedImageDimensions = (src: string) => {
+export const getUploadedImageDimensions = (src: string): Promise<unknown> => {
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () =>

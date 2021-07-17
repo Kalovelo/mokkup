@@ -9,7 +9,11 @@ type WrapRadioProps = {
   tooltip: string;
 };
 
-const WrapRadio: React.FC<WrapRadioProps> = ({ radioProps, children, tooltip }) => {
+const WrapRadio = ({
+  radioProps,
+  children,
+  tooltip,
+}: WrapRadioProps): JSX.Element => {
   const { getInputProps, getCheckboxProps } = useRadio(radioProps);
 
   const input = getInputProps();

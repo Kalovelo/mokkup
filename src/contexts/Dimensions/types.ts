@@ -1,8 +1,13 @@
-import { CHANGE_HEIGHT, CHANGE_RESOLUTION, CHANGE_SCALE, CHANGE_WIDTH } from "./constants";
+import {
+  CHANGE_HEIGHT,
+  CHANGE_RESOLUTION,
+  CHANGE_SCALE,
+  CHANGE_WIDTH,
+} from "./constants";
 
 export type Dimensions = {
   scale: number;
-  resolution?: {
+  resolution: {
     x: number;
     y: number;
   };

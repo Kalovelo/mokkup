@@ -1,15 +1,21 @@
-import { Fade, Flex, IconButton, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Fade,
+  Flex,
+  IconButton,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { BsCheck } from "react-icons/bs";
 import { COOKIE_NOTICE_TEXT } from "./constants";
 
-const CookieNotice = () => {
+const CookieNotice = (): JSX.Element => {
   const [cookies, setCookie] = useCookies(["hide_cookie_notice"]);
   const [open, setOpen] = React.useState(!cookies["hide_cookie_notice"]);
 
   const handleClose = () => {
-    let expiration = new Date();
+    const expiration = new Date();
     expiration.setTime(expiration.getTime() + 1000 * 60 * 24 * 30);
     setCookie("hide_cookie_notice", "1", { path: "/", expires: expiration });
     setOpen(false);
@@ -21,7 +27,17 @@ const CookieNotice = () => {
 
   return (
     <Fade in={open}>
-      <Flex position="fixed" bottom="0" m="10px" alignItems="center" gridGap="5" borderRadius="5" p="3" color={foreground} bg={background}>
+      <Flex
+        position="fixed"
+        bottom="0"
+        m="10px"
+        alignItems="center"
+        gridGap="5"
+        borderRadius="5"
+        p="3"
+        color={foreground}
+        bg={background}
+      >
         <Text>{COOKIE_NOTICE_TEXT}</Text>
         <IconButton
           fontSize="md"

@@ -7,13 +7,17 @@ import React from "react";
 import { generateGradient } from "utils/colors";
 import { resolutionDivider } from "../../utils/resizers";
 
-const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivElement> }) => {
-  const backgroundContext = useBackground()!;
-  const imageContext = useImage()!;
-  const dimensionsContext = useDimensions()!;
+const Foreground = ({
+  screenshotRef,
+}: {
+  screenshotRef: React.RefObject<HTMLDivElement>;
+}): JSX.Element => {
+  const backgroundContext = useBackground();
+  const imageContext = useImage();
+  const dimensionsContext = useDimensions();
 
-  const width = dimensionsContext.dimensions.resolution?.x!;
-  const height = dimensionsContext.dimensions.resolution?.y!;
+  const width: number = dimensionsContext.dimensions.resolution.x;
+  const height: number = dimensionsContext.dimensions.resolution.y;
 
   // re-calculate image dimensions
   useMediaQuery("(max-width: 600px)");
@@ -22,7 +26,8 @@ const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivE
     h: `${height / resolutionDivider(width, height)}px`,
   };
 
-  const { colors, direction } = backgroundContext.background;
+  const { colors, direction } =
+    backgroundContext && backgroundContext.background;
   const image = imageContext.image;
   const imageScale = dimensionsContext.dimensions.scale;
 
@@ -34,7 +39,13 @@ const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivE
   };
 
   return (
-    <Flex flexDirection="column" position="sticky" top="20" alignItems="center" justifyContent="center">
+    <Flex
+      flexDirection="column"
+      position="sticky"
+      top="20"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Flex
         data-testid="foregroundWrapper"
         shadow="lg"
@@ -47,8 +58,12 @@ const Foreground = ({ screenshotRef }: { screenshotRef: React.RefObject<HTMLDivE
         flexDirection="column"
         {...background()}
       >
-        <Flex data-testid="foreground" flexDir="column" transform={`scale(${imageScale})`}>
-          <DeviceWrapper image={image!} />
+        <Flex
+          data-testid="foreground"
+          flexDir="column"
+          transform={`scale(${imageScale})`}
+        >
+          <DeviceWrapper image={image} />
         </Flex>
       </Flex>
     </Flex>

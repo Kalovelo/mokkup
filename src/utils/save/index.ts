@@ -1,5 +1,5 @@
-export const saveAs = async (uri: string, filename: string) => {
-  var link = document.createElement("a");
+export const saveAs = async (uri: string, filename: string): Promise<void> => {
+  const link = document.createElement("a");
 
   if (typeof link.download === "string") {
     link.href = uri;

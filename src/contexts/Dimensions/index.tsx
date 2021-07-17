@@ -8,21 +8,34 @@ type DimensionsContextType = {
   dispatch: React.Dispatch<Action>;
 };
 
-const DimensionsContext = createContext<DimensionsContextType | null>(null);
+const DimensionsContext = createContext<DimensionsContextType | undefined>(
+  undefined
+);
 
-export const DimensionsProvider = ({ children }: { children: React.ReactNode }) => {
+export const DimensionsProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
   const defaultDimensions: Dimensions = {
     scale: 1,
     resolution: TWITTER_POST_SIZE,
   };
-  const [dimensions, dispatch] = React.useReducer(dimensionsReducer, defaultDimensions);
+  const [dimensions, dispatch] = React.useReducer(
+    dimensionsReducer,
+    defaultDimensions
+  );
 
   const providerProps = { dimensions, dispatch };
 
-  return <DimensionsContext.Provider value={providerProps}>{children}</DimensionsContext.Provider>;
+  return (
+    <DimensionsContext.Provider value={providerProps}>
+      {children}
+    </DimensionsContext.Provider>
+  );
 };
 
-export function useDimensions() {
+export function useDimensions(): DimensionsContextType {
   const context = React.useContext(DimensionsContext);
   if (context === undefined) {
     throw new Error("useDimensions must be used within DimensionsProvider");

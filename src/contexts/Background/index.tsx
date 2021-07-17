@@ -7,20 +7,31 @@ type BackgroundContextType = {
   dispatch: React.Dispatch<Action>;
 };
 
-const BackgroundContext = createContext<BackgroundContextType | null>(null);
+const BackgroundContext = createContext<BackgroundContextType | undefined>(
+  undefined
+);
 
 type BackgroundProviderType = {
   children: React.ReactNode;
 };
-export const BackgroundProvider: React.FC<BackgroundProviderType> = ({ children }: { children: React.ReactNode }) => {
-  const [background, dispatch] = React.useReducer(backgroundReducer, { colors: ["#536976", "#292E49"], direction: "to-r" });
+export const BackgroundProvider = ({
+  children,
+}: BackgroundProviderType): JSX.Element => {
+  const [background, dispatch] = React.useReducer(backgroundReducer, {
+    colors: ["#536976", "#292E49"],
+    direction: "to-r",
+  });
 
   const providerProps = { background, dispatch };
 
-  return <BackgroundContext.Provider value={providerProps}>{children}</BackgroundContext.Provider>;
+  return (
+    <BackgroundContext.Provider value={providerProps}>
+      {children}
+    </BackgroundContext.Provider>
+  );
 };
 
-export function useBackground() {
+export function useBackground(): BackgroundContextType {
   const context = React.useContext(BackgroundContext);
   if (context === undefined) {
     throw new Error("useBackground must be used within a BackgroundProvider");

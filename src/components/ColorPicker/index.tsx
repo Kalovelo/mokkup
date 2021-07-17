@@ -1,11 +1,19 @@
-import { Box, Button, Popover, PopoverArrow, PopoverCloseButton, PopoverContent, PopoverTrigger } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Popover,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverTrigger,
+} from "@chakra-ui/react";
 import React from "react";
 import { ChromePicker, ColorChangeHandler } from "react-color";
 import { formatHEX, formatRGBA } from "utils/colors";
 
 type ColorPickProps = { callback: ColorChangeHandler; color: string };
 
-const ColorPicker: React.FC<ColorPickProps> = ({ callback, color }) => {
+const ColorPicker = ({ callback, color }: ColorPickProps): JSX.Element => {
   return (
     <Popover>
       <PopoverTrigger>

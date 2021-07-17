@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 
 const Svg = styled("svg");
 
-const Kalovelogo = () => {
+const Kalovelogo = (): JSX.Element => {
   css();
   return (
     <Svg

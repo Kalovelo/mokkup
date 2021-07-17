@@ -1,4 +1,14 @@
-import { Box, ChakraProvider, ColorMode, ColorModeScript, extendTheme, Fade, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  ChakraProvider,
+  ColorMode,
+  ColorModeScript,
+  extendTheme,
+  Fade,
+  Grid,
+  GridItem,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import CookieNotice from "components/CookieNotice";
 import Footer from "components/Footer";
@@ -38,8 +48,18 @@ const Loading = () => {
     background: transparent !important;
   `;
   return (
-    <Box position="absolute" top="50%" left="50%" transform="translate(-50%,-50%)">
-      <ClimbingBoxLoader css={override} color={useColorModeValue("#000", "#fff")} loading size={15} />
+    <Box
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%,-50%)"
+    >
+      <ClimbingBoxLoader
+        css={override}
+        color={useColorModeValue("#000", "#fff")}
+        loading
+        size={15}
+      />
     </Box>
   );
 };
@@ -64,9 +84,23 @@ const App = () => {
                   <Fade unmountOnExit in={showLoader}>
                     <Loading />
                   </Fade>
-                  <Grid display={showLoader ? "none" : "grid"} gridTemplateRows="min-content" minH="100vh" p={{ base: 3, md: "7" }} fontSize="xl">
+                  <Grid
+                    display={showLoader ? "none" : "grid"}
+                    gridTemplateRows="min-content"
+                    minH="100vh"
+                    p={{ base: 3, md: "7" }}
+                    fontSize="xl"
+                  >
                     <Header />
-                    <Grid gap="6rem" justifyContent="center" templateColumns={{ base: "1fr", lg: "1fr 1fr", xl: "450px 1fr" }}>
+                    <Grid
+                      gap="6rem"
+                      justifyContent="center"
+                      templateColumns={{
+                        base: "1fr",
+                        lg: "1fr 1fr",
+                        xl: "450px 1fr",
+                      }}
+                    >
                       <GridItem display="grid" gridGap="2">
                         <ImagePicker />
                         <Toolbox />

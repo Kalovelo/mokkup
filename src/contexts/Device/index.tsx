@@ -7,9 +7,13 @@ type DeviceContextType = {
   device: Device;
   dispatch: React.Dispatch<Action>;
 };
-const DeviceContext = createContext<DeviceContextType | null>(null);
+const DeviceContext = createContext<DeviceContextType | undefined>(undefined);
 
-export const DeviceProvider = ({ children }: { children: React.ReactNode }) => {
+export const DeviceProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
   const defaultState: Device = {
     title: BROWSER,
     options: {
@@ -25,10 +29,14 @@ export const DeviceProvider = ({ children }: { children: React.ReactNode }) => {
 
   const providerProps = { device, dispatch };
 
-  return <DeviceContext.Provider value={providerProps}>{children}</DeviceContext.Provider>;
+  return (
+    <DeviceContext.Provider value={providerProps}>
+      {children}
+    </DeviceContext.Provider>
+  );
 };
 
-export function useDevice() {
+export function useDevice(): DeviceContextType {
   const context = React.useContext(DeviceContext);
   if (context === undefined) {
     throw new Error("useDevice must be used within a DeviceProvider");

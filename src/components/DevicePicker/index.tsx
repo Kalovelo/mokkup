@@ -21,10 +21,22 @@ import { AiOutlineMobile } from "react-icons/ai";
 import { FiCircle } from "react-icons/fi";
 import { GoBrowser } from "react-icons/go";
 import { formatRGBA } from "utils/colors";
-import { BEZEL_COLOR_LABEL, DARK_MODE, HIDDEN_BAR, HIDDEN_BURGER, PLACEHOLDER, STEALTH_BUTTONS, URL_LABEL } from "./constants";
+import {
+  BEZEL_COLOR_LABEL,
+  DARK_MODE,
+  HIDDEN_BAR,
+  HIDDEN_BURGER,
+  PLACEHOLDER,
+  STEALTH_BUTTONS,
+  URL_LABEL,
+} from "./constants";
 
 type BrowserOptionSwitch = {
-  title: typeof DARK_MODE | typeof HIDDEN_BAR | typeof HIDDEN_BURGER | typeof STEALTH_BUTTONS;
+  title:
+    | typeof DARK_MODE
+    | typeof HIDDEN_BAR
+    | typeof HIDDEN_BURGER
+    | typeof STEALTH_BUTTONS;
   defaultValue?: boolean;
   callback: (status: boolean) => void;
 };
@@ -54,8 +66,8 @@ const options: Option_Type[] = [
   },
 ];
 
-const DevicePicker: React.FC = () => {
-  const context = useDevice()!;
+const DevicePicker = (): JSX.Element => {
+  const context = useDevice();
 
   const handleChange = (nextValue: string) => {
     switch (nextValue) {
@@ -93,46 +105,74 @@ const DevicePicker: React.FC = () => {
   const browserOptions: BrowserOptionHandler = {
     input: {
       title: URL_LABEL,
-      defaultValue: context.device.options && (context.device.options as BrowserOptions).url,
+      defaultValue:
+        context.device.options &&
+        (context.device.options as BrowserOptions).url,
       callback: (e: React.ChangeEvent<HTMLInputElement>) => {
-        context.dispatch({ type: CHANGE_URL, payload: e.target!.value });
+        context.dispatch({ type: CHANGE_URL, payload: e.target?.value });
       },
     },
     switches: [
       {
         title: DARK_MODE,
         callback: () => context.dispatch({ type: TOGGLE_DARK_MODE }),
-        defaultValue: context.device.options && (context.device.options as BrowserOptions).isDark,
+        defaultValue:
+          context.device.options &&
+          (context.device.options as BrowserOptions).isDark,
       },
       {
         title: STEALTH_BUTTONS,
         callback: () => context.dispatch({ type: TOGGLE_STEALTH_BUTTONS }),
-        defaultValue: context.device.options && (context.device.options as BrowserOptions).isStealth,
+        defaultValue:
+          context.device.options &&
+          (context.device.options as BrowserOptions).isStealth,
       },
       {
         title: HIDDEN_BURGER,
         callback: () => context.dispatch({ type: TOGGLE_BURGER }),
-        defaultValue: context.device.options && (context.device.options as BrowserOptions).isBurgerHidden,
+        defaultValue:
+          context.device.options &&
+          (context.device.options as BrowserOptions).isBurgerHidden,
       },
       {
         title: HIDDEN_BAR,
         callback: () => context.dispatch({ type: TOGGLE_URL_BAR }),
-        defaultValue: context.device.options && (context.device.options as BrowserOptions).isBarHidden,
+        defaultValue:
+          context.device.options &&
+          (context.device.options as BrowserOptions).isBarHidden,
       },
     ],
   };
 
-  const changeBezelColor = (color: ColorResult): void => context.dispatch({ type: CHANGE_BEZEL_COLOR, payload: formatRGBA(color) });
+  const changeBezelColor = (color: ColorResult): void =>
+    context.dispatch({ type: CHANGE_BEZEL_COLOR, payload: formatRGBA(color) });
 
   return (
     <Grid gridGap="30">
-      <StackRadioGroup defaultValue={BROWSER} name="device type" options={options} callback={handleChange} />
-      <Grid gridTemplateColumns="1fr 1fr" justifyContent="space-evenly" gridGap="8" alignItems="center">
+      <StackRadioGroup
+        defaultValue={BROWSER}
+        name="device type"
+        options={options}
+        callback={handleChange}
+      />
+      <Grid
+        gridTemplateColumns="1fr 1fr"
+        justifyContent="space-evenly"
+        gridGap="8"
+        alignItems="center"
+      >
         {context.device.title === BROWSER && (
           <>
             {browserOptions.switches.map((browserOption, index) => (
-              <Grid key={index} gridTemplateColumns="90px 40px" justifyContent="center" alignItems="center">
-                <FormLabel htmlFor={browserOption.title}>{browserOption.title}</FormLabel>
+              <Grid
+                key={index}
+                gridTemplateColumns="90px 40px"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <FormLabel htmlFor={browserOption.title}>
+                  {browserOption.title}
+                </FormLabel>
                 <Switch
                   defaultIsChecked={browserOption.defaultValue}
                   onChange={(e) => browserOption.callback(e.target.checked)}
@@ -141,7 +181,11 @@ const DevicePicker: React.FC = () => {
               </Grid>
             ))}
             <Flex gridGap="2" alignItems="center" gridColumn="1/-1">
-              <FormLabel m="0" textAlign="center" htmlFor={browserOptions.input.title}>
+              <FormLabel
+                m="0"
+                textAlign="center"
+                htmlFor={browserOptions.input.title}
+              >
                 {browserOptions.input.title}
               </FormLabel>
               <Input
@@ -158,7 +202,10 @@ const DevicePicker: React.FC = () => {
         {context.device.title === BEZEL && (
           <>
             <label style={{ fontSize: ".9rem" }}>{BEZEL_COLOR_LABEL}</label>
-            <ColorPicker color={(context.device.options as BezelOptions).color} callback={(color: ColorResult) => changeBezelColor(color)} />
+            <ColorPicker
+              color={(context.device.options as BezelOptions).color}
+              callback={(color: ColorResult) => changeBezelColor(color)}
+            />
           </>
         )}
       </Grid>

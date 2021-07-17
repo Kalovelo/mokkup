@@ -1,7 +1,22 @@
-import { Grid, GridItem, InputGroup, InputLeftAddon, NumberInput, NumberInputField, Text, Tooltip } from "@chakra-ui/react";
+import {
+  Grid,
+  GridItem,
+  InputGroup,
+  InputLeftAddon,
+  NumberInput,
+  NumberInputField,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import ColorPicker from "components/ColorPicker";
 import { useShadow } from "contexts/Shadow";
-import { CHANGE_BLUR, CHANGE_COLOR, CHANGE_SPREAD, CHANGE_X, CHANGE_Y } from "contexts/Shadow/constants";
+import {
+  CHANGE_BLUR,
+  CHANGE_COLOR,
+  CHANGE_SPREAD,
+  CHANGE_X,
+  CHANGE_Y,
+} from "contexts/Shadow/constants";
 import React from "react";
 import { ColorResult } from "react-color";
 import { formatRGBA } from "utils/colors";
@@ -25,14 +40,19 @@ type gridItem = {
   value: number;
 };
 
-const ShadowPicker: React.FC = () => {
-  const context = useShadow()!;
+const ShadowPicker = (): JSX.Element => {
+  const context = useShadow();
 
-  const changeColor = (color: ColorResult): void => context.dispatch({ type: CHANGE_COLOR, payload: formatRGBA(color) });
-  const changeX = (x: number): void => context.dispatch({ type: CHANGE_X, payload: x });
-  const changeY = (y: number): void => context.dispatch({ type: CHANGE_Y, payload: y });
-  const changeBlur = (blur: number): void => context.dispatch({ type: CHANGE_BLUR, payload: blur });
-  const changeSpread = (spread: number): void => context.dispatch({ type: CHANGE_SPREAD, payload: spread });
+  const changeColor = (color: ColorResult): void =>
+    context.dispatch({ type: CHANGE_COLOR, payload: formatRGBA(color) });
+  const changeX = (x: number): void =>
+    context.dispatch({ type: CHANGE_X, payload: x });
+  const changeY = (y: number): void =>
+    context.dispatch({ type: CHANGE_Y, payload: y });
+  const changeBlur = (blur: number): void =>
+    context.dispatch({ type: CHANGE_BLUR, payload: blur });
+  const changeSpread = (spread: number): void =>
+    context.dispatch({ type: CHANGE_SPREAD, payload: spread });
 
   const gridItems: gridItem[] = [
     {
@@ -61,20 +81,43 @@ const ShadowPicker: React.FC = () => {
     },
   ];
   return (
-    <Grid gridGap="0.5rem" templateColumns={{ base: "repeat(2,1fr)", lg: "repeat(4,6rem)" }}>
+    <Grid
+      gridGap="0.5rem"
+      templateColumns={{ base: "repeat(2,1fr)", lg: "repeat(4,6rem)" }}
+    >
       <GridItem marginY="2" gridColumn={{ base: "1", lg: "1/3" }}>
-        <ColorPicker color={context.shadow.color} callback={(color: ColorResult) => changeColor(color)} />
+        <ColorPicker
+          color={context.shadow.color}
+          callback={(color: ColorResult) => changeColor(color)}
+        />
       </GridItem>
-      <Text gridColumn={{ base: "2", lg: "3/-1" }} display="flex" alignItems="center" justifyContent="center" textAlign="center" fontSize=".9rem">
+      <Text
+        gridColumn={{ base: "2", lg: "3/-1" }}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        fontSize=".9rem"
+      >
         {VALUE_INFORMATION}
       </Text>
       {gridItems.map(({ label, callback, tooltip, value }, index) => (
         <GridItem key={index} display="flex" gridGap="1rem" alignItems="center">
           <InputGroup>
             <Tooltip label={tooltip}>
-              <InputLeftAddon fontSize=".9rem" justifyContent="center" children={label} />
+              <InputLeftAddon
+                fontSize=".9rem"
+                justifyContent="center"
+                children={label}
+              />
             </Tooltip>
-            <NumberInput w="100%" inputMode="numeric" placeholder="0" defaultValue={value} onChange={(val) => callback(parseNumberInput(val))}>
+            <NumberInput
+              w="100%"
+              inputMode="numeric"
+              placeholder="0"
+              defaultValue={value}
+              onChange={(val) => callback(parseNumberInput(val))}
+            >
               <NumberInputField textAlign="center" p="2" />
             </NumberInput>
           </InputGroup>

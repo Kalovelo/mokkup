@@ -19,13 +19,17 @@ describe("App.BackgroundPicker", () => {
     render(<App />);
     const left_button = screen.getByLabelText("Rotate gradients left");
     fireEvent.click(left_button);
-    expect(screen.getByTestId("foregroundWrapper")).toHaveStyle("background-image: linear-gradient(to top right, #536976, #292E49)");
+    expect(screen.getByTestId("foregroundWrapper")).toHaveStyle(
+      "background-image: linear-gradient(to top right, #536976, #292E49)"
+    );
   });
 
   it("Rotate gradients right on right rotation", () => {
     render(<App />);
     const right_button = screen.getByLabelText("Rotate gradients right");
     fireEvent.click(right_button);
-    expect(screen.getByTestId("foregroundWrapper")).toHaveStyle("background-image: linear-gradient(to bottom right, #536976, #292E49)");
+    expect(screen.getByTestId("foregroundWrapper")).toHaveStyle(
+      "background-image: linear-gradient(to bottom right, #536976, #292E49)"
+    );
   });
 });

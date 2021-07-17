@@ -1,4 +1,10 @@
-import { CHANGE_BLUR, CHANGE_COLOR, CHANGE_SPREAD, CHANGE_X, CHANGE_Y } from "./constants";
+import {
+  CHANGE_BLUR,
+  CHANGE_COLOR,
+  CHANGE_SPREAD,
+  CHANGE_X,
+  CHANGE_Y,
+} from "./constants";
 
 export type Shadow = {
   x: number;

@@ -1,8 +1,15 @@
-import { CHANGE_BACKGROUND, CHANGE_COLORS, CHANGE_DIRECTION } from "./constants";
+import {
+  CHANGE_BACKGROUND,
+  CHANGE_COLORS,
+  CHANGE_DIRECTION,
+} from "./constants";
 import { Action, Background } from "./types";
 
-export function backgroundReducer(state: Background, action: Action) {
-  const newBackground = { ...state };
+export function backgroundReducer(
+  state: Background,
+  action: Action
+): Background {
+  const newBackground: Background = { ...state };
   switch (action.type) {
     case CHANGE_COLORS: {
       newBackground.colors = action.payload;

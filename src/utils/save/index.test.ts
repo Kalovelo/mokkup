@@ -6,7 +6,9 @@ describe("save.saveAs", () => {
     const link = document.createElement("a");
     link.click = jest.fn();
 
-    const spy = jest.spyOn(document, "createElement").mockImplementation(() => link);
+    const spy = jest
+      .spyOn(document, "createElement")
+      .mockImplementation(() => link);
     await saveAs(defaultImage, "mokkup.com");
 
     expect(spy).toHaveBeenCalled();
