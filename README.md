@@ -15,5 +15,5 @@ Mokkup is a React application for glowing up images, for social media or your po
 - Jest
 
 # Example - Twitter post 1200 x 630
-![image](https://user-images.githubusercontent.com/45261205/125670896-1ce72e95-ecbe-4395-b709-2d776d7566a5.png)
+![image](https://user-images.githubusercontent.com/45261205/126049672-4114796d-b51b-4171-b184-387a367035f3.png)
 
