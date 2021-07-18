@@ -26,7 +26,7 @@ const CookieNotice = (): JSX.Element => {
   const iconColor = useColorModeValue("whiteAlpha", "black");
 
   return (
-    <Fade in={open}>
+    <Fade unmountOnExit in={open}>
       <Flex
         position="fixed"
         bottom="0"
